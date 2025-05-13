@@ -18,6 +18,7 @@ class QuestionnaireFactory extends Factory
     {
         return [
             'description' => $this->faker->words(2, true),
+            'position' => $this->faker->randomElement(['initial', 'final']),
             'respondable_type' => 'App\Models\Research',
             'respondable_id' => 1,
         ];

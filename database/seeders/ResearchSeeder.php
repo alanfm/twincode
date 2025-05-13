@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Comparison;
+use App\Models\Question;
 use App\Models\Questionnaire;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -27,7 +28,12 @@ class ResearchSeeder extends Seeder
                     'respondable_type' => Research::class,
                     'respondable_id' => $research->id,
                 ];
-            }))
+            })->has(
+                Question::factory(5)->state(function (array $attributes, Questionnaire $questionnaire) {
+                    return [
+                        'questionnaire_id' => $questionnaire->id,
+                    ];
+                })))
             ->create();
     }
 }

@@ -1,61 +1,37 @@
-function Form({ data, setData, errors, edit }) {
+function Form({ data, setData, errors, respondable_type }) {
     return (
         <>
             <div className="flex flex-col">
-                <label htmlFor="name">Nome:</label>
+                <label htmlFor="description">Descrição:</label>
                 <input
                     type='text'
-                    name='name'
-                    id='name'
-                    value={data.name}
+                    name='description'
+                    id='description'
+                    value={data.description}
                     className='rounded-md'
-                    onChange={(e) => setData('name', e.target.value)}
-                    placeholder='Nome do usuário'
+                    onChange={(e) => setData('description', e.target.value)}
+                    placeholder='Descrição do questionário'
+                    autoComplete='off'
                 />
-                {errors.name && <p className='text-red-500 text-sm'>{errors.name}</p>}
+                {errors.description && <p className='text-red-500 text-sm'>{errors.description}</p>}
             </div>
-            <div className="flex flex-col">
-                <label htmlFor="email">E-mail:</label>
-                <input
-                    type='email'
-                    name='email'
-                    id='email'
-                    value={data.email}
-                    className='rounded-md'
-                    onChange={(e) => setData('email', e.target.value)}
-                    placeholder='Descrição da pesquisa'
-                    required
-                />
-                {errors.email && <p className='text-red-500 text-sm'>{errors.email}</p>}
-            </div>
-            <div className="flex flex-col">
-                <label htmlFor="password">Senha:</label>
-                <input
-                    type='password'
-                    name='password'
-                    id='password'
-                    value={data.password}
-                    className='rounded-md'
-                    onChange={(e) => setData('password', e.target.value)}
-                    placeholder='Senha do usuário'
-                    required={!edit}
-                />
-                {errors.password && <p className='text-red-500 text-sm'>{errors.password}</p>}
-            </div>
-            <div className="flex flex-col">
-                <label htmlFor="password">Confirmação de Senha:</label>
-                <input
-                    type='password'
-                    name='password_confirmation'
-                    id='password_confirmation'
-                    value={data.password_confirmation}
-                    className='rounded-md'
-                    onChange={(e) => setData('password_confirmation', e.target.value)}
-                    placeholder='Confirme a senha do usuário'
-                    required={!edit}
-                />
-                {errors.password && <p className='text-red-500 text-sm_confirmation'>{errors.password}</p>}
-            </div>
+            {respondable_type == 'research' && (
+                <div className="flex flex-col">
+                    <label htmlFor="position">Posição:</label>
+                    <select
+                        name='position'
+                        id='position'
+                        value={data.position}
+                        className='rounded-md'
+                        onChange={(e) => setData('position', e.target.value)}
+                        required
+                    >
+                        <option value='initial'>Inicial</option>
+                        <option value='final'>Final</option>
+                    </select>
+                    {errors.position && <p className='text-red-500 text-sm'>{errors.position}</p>}
+                </div>
+            )}
         </>
     );
 }

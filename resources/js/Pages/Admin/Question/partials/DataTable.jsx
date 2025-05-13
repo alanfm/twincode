@@ -1,21 +1,23 @@
 import { Link, router } from "@inertiajs/react";
 import { useMemo } from "react";
 
-function DataTable({ data, respondable_type, respondable_id }) {
+function DataTable({ data }) {
     const dataTable = useMemo(() => {
-        return data.map((questionnaire, i) => {
+        return data.map((research, i) => {
             return (
                 <tr
-                    key={questionnaire.id}
+                    key={research.id}
                     className={(i % 2 ? 'bg-neutral-100' : '') + ' hover:bg-neutral-200 cursor-pointer'}
-                    onClick={() => {router.get(route('questionnaires.show', { respondable: respondable_type, id: respondable_id, questionnaire: questionnaire.id }), {method: 'get'})}}
-                    onMouseOver={() => router.prefetch(route('questionnaires.show', { respondable: respondable_type, id: respondable_id, questionnaire: questionnaire.id }), {method: 'get'},{cacheFor: '1m'})}
+                    onClick={() => {router.get(route('research.show', research.id))}}
+                    onMouseOver={() => router.prefetch(route('research.show', research.id), {method: 'get'},{cacheFor: '1m'})}
                     title="Ver detalhes"
                 >
-                    <td className='py-1 px-1 m-0'>{questionnaire.description}</td>
-                    {respondable_type == 'research' && <td className='py-1 px-1 m-0'>{questionnaire.position == 'final'? 'Final': 'Inicial'}</td>}
+                    <td className='py-1 px-1 m-0 leading-5'>{research.title}</td>
+                    <td className='py-1 px-1 m-0 leading-5'><div className="line-clamp-2 whitespace-normal">{research.description}</div></td>
+                    <td className='py-1 px-1 m-0 leading-5'>{research.author}</td>
+                    <td className='py-1 px-1 m-0 leading-5'>{research.institution}</td>
                     <td className='py-1 pr-6 leading-none text-right align-middle'>
-                        <Link href={route('questionnaires.show', { respondable: respondable_type, id: respondable_id, questionnaire: questionnaire.id })} className='inline-block text-blue-500 hover:text-blue-600 transition' title='Ver detalhes'>
+                        <Link href={route('research.show', research.id)} className='inline-block text-blue-500 hover:text-blue-600 transition' title='Ver detalhes'>
                             <svg xmlns="http://www.w3.org/2000/svg" className="size-8" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                 <path d="M12 9h.01" />
@@ -34,9 +36,11 @@ function DataTable({ data, respondable_type, respondable_id }) {
             <table className='table-auto w-full'>
                 <thead className='border-b border-neutral-300'>
                     <tr>
-                        <th className='text-left px-1'>Descrição</th>
-                        {respondable_type == 'research' && <th className='text-left px-1'>Posição</th>}
-                        <th className='text-right px-1'>Detalhes</th>
+                        <th className='w-2/12 text-left px-1'>Título</th>
+                        <th className='w-5/12 text-left px-1'>Descrição</th>
+                        <th className='w-2/12 text-left px-1'>Autor</th>
+                        <th className='w-2/12 text-left px-1'>Instituição</th>
+                        <th className='w-1/12 text-right px-1'>Detalhes</th>
                     </tr>
                 </thead>
                 <tbody>

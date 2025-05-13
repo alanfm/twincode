@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Http\Request;
 
@@ -54,7 +55,7 @@ class Comparison extends Model
      */
     public function research(): BelongsTo
     {
-        return $this->belongsTo(Research::class, 'reseach_id');
+        return $this->belongsTo(Research::class)->withDefault();
     }
 
     /**
@@ -62,9 +63,9 @@ class Comparison extends Model
      *
      * @return MorphOne
      */
-    public function questionarie(): MorphOne
+    public function questionnaires(): MorphMany
     {
-        return $this->morphOne(Questionnaire::class, 'respondable');
+        return $this->morphMany(Questionnaire::class, 'respondable');
     }
 
     /**
@@ -86,6 +87,7 @@ class Comparison extends Model
 
         $count = $query->count();
         $data = $query->orderBy('description', 'ASC')->paginate(env('APP_RECORDS_PER_PAGE', 10));
+
         return [
             'count' => $count,
             'data' => $data,

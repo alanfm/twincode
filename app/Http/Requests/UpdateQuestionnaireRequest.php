@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Questionnaire;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateQuestionnaireRequest extends FormRequest
 {
@@ -11,7 +13,7 @@ class UpdateQuestionnaireRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +24,8 @@ class UpdateQuestionnaireRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'description' => 'required|string|max:255',
+            'position' => [Rule::in(Questionnaire::POSITIONS), Rule::requiredIf($this->respondable_type === 'research')],
         ];
     }
 }

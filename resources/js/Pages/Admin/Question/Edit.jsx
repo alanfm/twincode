@@ -1,33 +1,38 @@
 import Breadcrumb from '@/Components/Twincode/Dashboard/Breadcrumb';
 import Panel from '@/Components/Twincode/Dashboard/Panel';
 import DashboardLayout from '@/Layouts/DashboardLayout';
-import { Head, Link, router, useForm } from '@inertiajs/react';
+import { Head, Link, useForm } from '@inertiajs/react';
 import Form from './partials/Form';
-import breadcrumbsItems from '@/helpers/breadcrumbsItems';
 
-function Create({ respondable, respondable_type, respondable_id }) {
-    const { data, setData, post, processing, errors } = useForm({
-        description: '',
-        position: 'initial',
+function Edit({ research }) {
+    const { data, setData, put, processing, errors } = useForm({
+        title: research.title,
+        description: research.description,
+        author: research.author,
+        institution: research.institution
     });
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        post(route('questionnaires.store', { respondable: respondable_type, id: respondable_id }), { data });
+        put(route('research.update', research.id), { data });
     }
-
     return (
         <DashboardLayout>
-            <Head title="Cadastrar Questionário" />
-            <Breadcrumb items={[...breadcrumbsItems('create', respondable, respondable_type, respondable_id)]} />
+            <Head title="Editar Pesquisa" />
+            <Breadcrumb items={[
+                { label: 'Dashboard', href: route('dashboard') },
+                { label: 'Pesquisas', href: route('research.index') },
+                { label: 'Editar', href: route('research.edit', research.id) },
+                { label: research.title, href: route('research.edit', research.id) },
+            ]} />
             <div className="flex flex-col gap-4 h-full">
-                <h1 className="text-2xl font-extrabold">Cadastrar Questionário</h1>
+                <h1 className="text-2xl font-extrabold">Editar Pesquisa</h1>
                 <form className='flex flex-col gap-4 h-full' onSubmit={handleSubmit}>
                     <Panel className={'flex flex-col gap-4'}>
-                        <Form data={data} setData={setData} errors={errors} edit={false} respondable_type={respondable_type} />
+                        <Form data={data} setData={setData} errors={errors} />
                     </Panel>
                     <Panel className={'flex justify-center gap-4'}>
-                        <Link href={route('questionnaires.index', { respondable: respondable_type, id: respondable_id, search: '', page: 1})} className='btn btn-neutral' prefetch>
+                        <Link href={route('research.show', research.id)} className='btn btn-neutral' prefetch>
                             <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="size-5"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M9 11l-4 4l4 4m-4 -4h11a4 4 0 0 0 0 -8h-1" /></svg>
                             <span>Voltar</span>
                         </Link>
@@ -42,4 +47,4 @@ function Create({ respondable, respondable_type, respondable_id }) {
     );
 }
 
-export default Create;
+export default Edit;

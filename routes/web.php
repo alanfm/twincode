@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\ComparisonController;
+use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\QuestionnaireController;
 use App\Http\Controllers\Admin\ResearchController;
 use App\Http\Controllers\Admin\UserController;
@@ -37,6 +38,9 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     })->name('admin.home');
     Route::resource('research', ResearchController::class);
     Route::resource('research.comparison', ComparisonController::class);
-    Route::resource('{respondable}/{id}/questionnaires', QuestionnaireController::class);
+    Route::resource('{respondable}/{id}/questionnaires', QuestionnaireController::class)
+        ->whereNumber('id')
+        ->whereAlpha('respondable');
+    Route::resource('questionnaires.questions', QuestionController::class);
     Route::resource('users', UserController::class);
 });

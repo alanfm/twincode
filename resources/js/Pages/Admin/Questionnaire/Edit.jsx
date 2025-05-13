@@ -3,34 +3,31 @@ import Panel from '@/Components/Twincode/Dashboard/Panel';
 import DashboardLayout from '@/Layouts/DashboardLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
 import Form from './partials/Form';
+import breadcrumbsItems from '@/helpers/breadcrumbsItems';
 
-function Edit({ user }) {
+function Edit({ questionnaire, respondable, respondable_type, respondable_id }) {
     const { data, setData, put, processing, errors } = useForm({
-        name: user.name,
-        email: user.email,
+        description: questionnaire.description,
+        position: questionnaire.position,
     });
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        put(route('users.update', user.id), { data });
+        put(route('questionnaires.update', {respondable: respondable_type, id: respondable_id, questionnaire: questionnaire.id}), { data });
     }
+
     return (
         <DashboardLayout>
-            <Head title="Editar Usuário" />
-            <Breadcrumb items={[
-                { label: 'Dashboard', href: route('dashboard') },
-                { label: 'Usuários', href: route('users.index') },
-                { label: 'Editar', href: route('users.edit', user.id) },
-                { label: user.title, href: route('users.edit', user.id) },
-            ]} />
+            <Head title="Editar Questionário" />
+            <Breadcrumb items={breadcrumbsItems('show', respondable, respondable_type, respondable_id, questionnaire)} />
             <div className="flex flex-col gap-4 h-full">
-                <h1 className="text-2xl font-extrabold">Editar Usuário</h1>
+                <h1 className="text-2xl font-extrabold">Editar Questionário</h1>
                 <form className='flex flex-col gap-4 h-full' onSubmit={handleSubmit}>
                     <Panel className={'flex flex-col gap-4'}>
-                        <Form data={data} setData={setData} errors={errors} edit={true} />
+                        <Form data={data} setData={setData} errors={errors} edit={true} respondable_type={respondable_type} />
                     </Panel>
                     <Panel className={'flex justify-center gap-4'}>
-                        <Link href={route('users.show', user.id)} className='btn btn-neutral' prefetch>
+                        <Link href={route('questionnaires.show', {respondable: respondable_type, id: respondable_id, questionnaire: questionnaire.id})} className='btn btn-neutral' prefetch>
                             <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="size-5"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M9 11l-4 4l4 4m-4 -4h11a4 4 0 0 0 0 -8h-1" /></svg>
                             <span>Voltar</span>
                         </Link>

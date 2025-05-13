@@ -3,31 +3,36 @@ import Panel from '@/Components/Twincode/Dashboard/Panel';
 import DashboardLayout from '@/Layouts/DashboardLayout';
 import { Head, Link, router, useForm } from '@inertiajs/react';
 import Form from './partials/Form';
-import breadcrumbsItems from '@/helpers/breadcrumbsItems';
 
-function Create({ respondable, respondable_type, respondable_id }) {
+function Create() {
     const { data, setData, post, processing, errors } = useForm({
+        title: '',
         description: '',
-        position: 'initial',
+        author: '',
+        institution: ''
     });
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        post(route('questionnaires.store', { respondable: respondable_type, id: respondable_id }), { data });
+        post(route('research.store'), { data });
     }
 
     return (
         <DashboardLayout>
-            <Head title="Cadastrar Questionário" />
-            <Breadcrumb items={[...breadcrumbsItems('create', respondable, respondable_type, respondable_id)]} />
+            <Head title="Cadastrar Pesquisa" />
+            <Breadcrumb items={[
+                { label: 'Dashboard', href: route('dashboard') },
+                { label: 'Pesquisas', href: route('research.index') },
+                { label: 'Cadastrar', href: route('research.create') }
+            ]} />
             <div className="flex flex-col gap-4 h-full">
-                <h1 className="text-2xl font-extrabold">Cadastrar Questionário</h1>
+                <h1 className="text-2xl font-extrabold">Cadastrar Pesquisa</h1>
                 <form className='flex flex-col gap-4 h-full' onSubmit={handleSubmit}>
                     <Panel className={'flex flex-col gap-4'}>
-                        <Form data={data} setData={setData} errors={errors} edit={false} respondable_type={respondable_type} />
+                        <Form data={data} setData={setData} errors={errors} />
                     </Panel>
                     <Panel className={'flex justify-center gap-4'}>
-                        <Link href={route('questionnaires.index', { respondable: respondable_type, id: respondable_id, search: '', page: 1})} className='btn btn-neutral' prefetch>
+                        <Link href={route('research.index', { search: '', page: 1})} className='btn btn-neutral' prefetch>
                             <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="size-5"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M9 11l-4 4l4 4m-4 -4h11a4 4 0 0 0 0 -8h-1" /></svg>
                             <span>Voltar</span>
                         </Link>

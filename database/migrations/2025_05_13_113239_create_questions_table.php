@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('questionnaires', function (Blueprint $table) {
+        Schema::create('questions', function (Blueprint $table) {
             $table->id();
-            $table->string('description');
-            $table->string('position')->nullable();
-            $table->morphs('respondable');
+            $table->string('statement');
+            $table->enum('type', ['text', 'radio', 'checkbox']);
+            $table->foreignId('questionnaire_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('questionnaires');
+        Schema::dropIfExists('questions');
     }
 };

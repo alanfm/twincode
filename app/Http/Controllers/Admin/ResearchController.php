@@ -39,7 +39,7 @@ class ResearchController extends Controller
             $research = Research::create($request->validated());
 
             return Redirect::route('research.show', $research)->with('alert', [
-                'message' => 'Registro atualizado com sucesso.',
+                'message' => 'Registro criado com sucesso.',
                 'type' => 'success'
             ]);
         } catch (Exception $e) {
