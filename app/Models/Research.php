@@ -14,15 +14,28 @@ class Research extends Model
     use HasFactory;
 
     /**
+     * The statuses that the research can have.
+     *
+     * @var array<string>
+     */
+    public const STATUS = [
+        'active',
+        'inactive',
+        'archived',
+    ];
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var list<string>
      */
     protected $fillable = [
+        'key',
         'title',
         'description',
         'author',
         'institution',
+        'status',
     ];
 
     /**
@@ -33,10 +46,12 @@ class Research extends Model
     public function casts(): array
     {
         return [
+            'key' => 'string',
             'title' => 'string',
             'description' => 'string',
             'author' => 'string',
             'institution' => 'string',
+            'status' => 'string',
             'created_at' => 'datetime:d/m/Y H:i:s',
             'updated_at' => 'datetime:d/m/Y H:i:s',
         ];
@@ -52,6 +67,7 @@ class Research extends Model
         $query->when($request->search, function ($query) use ($request) {
             $query->where('title', 'like', "%{$request->search}%")
                 ->orWhere('description', 'like', "%{$request->search}%")
+                ->orWhere('key', 'like', "%{$request->search}%")
                 ->orWhere('author', 'like', "%{$request->search}%")
                 ->orWhere('institution', 'like', "%{$request->search}%");
         });
@@ -84,5 +100,10 @@ class Research extends Model
     public function questionnaire(): MorphOne
     {
         return $this->morphOne(Questionnaire::class, 'respondable');
+    }
+
+    public function scopeGetByKey(Builder $query, string $key): Research
+    {
+        return $query->where('key', $key)->firstOrFail();
     }
 }

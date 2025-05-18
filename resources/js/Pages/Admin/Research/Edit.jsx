@@ -9,7 +9,8 @@ function Edit({ research }) {
         title: research.title,
         description: research.description,
         author: research.author,
-        institution: research.institution
+        institution: research.institution,
+        status: research.status,
     });
 
     const handleSubmit = (e) => {

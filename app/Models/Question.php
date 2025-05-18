@@ -6,12 +6,24 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Http\Request;
 
 class Question extends Model
 {
     /** @use HasFactory<\Database\Factories\QuestionFactory> */
     use HasFactory;
+
+    /**
+     * Types of answer for questions.
+     *
+     * @var array<string>
+     */
+    public const TYPES = [
+        'text',
+        'radio',
+        'checkbox',
+    ];
 
     /**
      * The attributes that are mass assignable.
@@ -53,6 +65,16 @@ class Question extends Model
     }
 
     /**
+     * Get the options for the question.
+     *
+     * @return HasMany<Option, Question>
+     */
+    public function options(): HasMany
+    {
+        return $this->hasMany(Option::class);
+    }
+
+    /**
      * Scope a query to only include questions that match the search criteria.
      *
      * @param  Builder  $query
@@ -62,10 +84,10 @@ class Question extends Model
      */
     public function scopeSearch(Builder $query, Questionnaire $questionnaire, Request $request): array
     {
-        $query->when($request->search, function ($query) use ($questionnaire, $request) {
-            $query->where('questionnaire_id', $questionnaire->id)
-                ->where('statement', 'like', "%{$request->search}%");
-        });
+        $query->where('questionnaire_id', $questionnaire->id)
+            ->where(function ($query) use ($request) {
+                $query->where('statement', 'like', "%{$request->search}%");
+            });
 
         $coutn = $query->count();
         $data = $query->orderBy('statement', 'ASC')->paginate(env('APP_RECORDS_PER_PAGE', 10));
@@ -75,7 +97,7 @@ class Question extends Model
             'data' => $data,
             'search' => $request->search ?? '',
             'page' => $request->page ?? 1,
-            'questionnaire' => $questionnaire,
+            'questionnaire' => $questionnaire->load('respondable'),
         ];
     }
 }

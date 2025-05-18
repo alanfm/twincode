@@ -1,6 +1,4 @@
-import { Head } from "@inertiajs/react";
-
-function RootLayout({ children, title }) {
+function RootLayout({ children }) {
     return (
         <div>
             {children}

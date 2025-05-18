@@ -2,63 +2,85 @@ import Breadcrumb from '@/Components/Twincode/Dashboard/Breadcrumb';
 import ConfirmDelete from '@/Components/Twincode/Dashboard/ConfirmDelete';
 import Panel from '@/Components/Twincode/Dashboard/Panel';
 import DashboardLayout from '@/Layouts/DashboardLayout';
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, usePage } from '@inertiajs/react';
+import BadgeTypeQuestion from './partials/BadgeTypeQuestion';
+import breadcrumbsItems from '@/helpers/breadcrumbsItems';
+import AddOption from './partials/AddOption';
+import DeleteOption from './partials/DeleteOption';
+import Alert from '@/Components/Twincode/Dashboard/Alert';
 
-function Show({ research }) {
+function Show({ question, questionnaire }) {
+    const { flash } = usePage().props;
     return (
         <>
             <Head title="Detalhes" />
+            {!!flash.alert && <Alert type={flash.alert.type} message={flash.alert.message} show={!!flash.alert} />}
             <Breadcrumb items={[
-                { label: 'Dashboard', href: route('dashboard') },
-                { label: 'Pesquisas', href: route('research.index') },
-                { label: research.title, href: route('research.show', research.id) }
+                ...breadcrumbsItems('show', '', '', '', questionnaire),
+                { label: 'Questões', href: route('questionnaires.questions.index', { questionnaire: questionnaire.id }) },
+                { label: question.statement, href: route('questionnaires.questions.show', { question: question.id, questionnaire: questionnaire.id }) },
             ]} />
             <div className="flex flex-col gap-4 h-full">
-                <h1 className="text-2xl font-extrabold">Datalhes da Pesquisa</h1>
-                <Panel className={'h-full flex flex-col gap-4'}>
-                    <div className="">
-                        <p>Título:</p>
-                        <p className='font-normal'>{research.title}</p>
-                    </div>
-                    <div className="">
-                        <p>Descrição:</p>
-                        <p className='font-normal'>{research.description}</p>
-                    </div>
-                    <div className="">
-                        <p>Autor:</p>
-                        <p className='font-normal'>{research.author}</p>
-                    </div>
-                    <div className="">
-                        <p>Instituição:</p>
-                        <p className='font-normal'>{research.institution}</p>
-                    </div>
-                    <div className="">
-                        <p>Criado em:</p>
-                        <p className='font-normal'>{research.created_at}</p>
-                    </div>
-                    <div className="">
-                        <p>Atualizado em:</p>
-                        <p className='font-normal'>{research.created_at}</p>
-                    </div>
-                </Panel>
+                <h1 className="text-2xl font-extrabold">Datalhes da Questão</h1>
+                <div className="flex gap-4">
+                    <Panel className={'h-full flex flex-col gap-4 flex-1'}>
+                        <div className="">
+                            <p>Enunciado:</p>
+                            <p className='font-normal'>{question.statement}</p>
+                        </div>
+                        <div className="">
+                            <p>Tipo:</p>
+                            <p className='font-normal'><BadgeTypeQuestion type={question.type} /></p>
+                        </div>
+                        <div className="">
+                            <p>Criado em:</p>
+                            <p className='font-normal'>{question.created_at}</p>
+                        </div>
+                        <div className="">
+                            <p>Atualizado em:</p>
+                            <p className='font-normal'>{question.created_at}</p>
+                        </div>
+                    </Panel>
+                    {question.type !== 'text' && (
+                        <Panel className={'h-full flex flex-col gap-4 flex-1'}>
+                            <div className="flex justify-between items-center">
+                                <h2 className='text-xl font-extrabold'>Items da questão</h2>
+                                <AddOption question={question} />
+                            </div>
+                            <table className='table-auto w-full'>
+                                <thead className='border-b border-neutral-300'>
+                                    <tr>
+                                        <th className='text-left'>Descrição</th>
+                                        <th className='text-center'>Ação</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {question.options.map((option, i) => (
+                                        <tr
+                                            key={option.id}
+                                            className={(i % 2 ? 'bg-neutral-100 ' : '') + 'hover:bg-neutral-200'}
+                                        >
+                                            <td className='py-1 px-1 m-0'>{option.description}</td>
+                                            <td className='py-1 pr-6 leading-none text-right align-middle'>
+                                                <DeleteOption url={route('questions.options.destroy', { question: question.id, option: option.id })} />
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </Panel>
+                    )}
+                </div>
                 <Panel className={'flex gap-4 justify-center items-center'}>
-                    <Link href={route('research.index', {search: '', page: 1})} className='btn btn-neutral' prefetch>
+                    <Link href={route('questionnaires.questions.index', { questionnaire: questionnaire.id, search: '', page: 1 })} className='btn btn-neutral' prefetch>
                         <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="size-5"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M9 11l-4 4l4 4m-4 -4h11a4 4 0 0 0 0 -8h-1" /></svg>
                         <span>Voltar</span>
                     </Link>
-                    <Link href={route('research.edit', { research: research.id })} className='btn btn-yellow' prefetch>
+                    <Link href={route('questionnaires.questions.edit', { question: question.id, questionnaire: questionnaire.id })} className='btn btn-yellow' prefetch>
                         <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="size-5"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" /><path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" /><path d="M16 5l3 3" /></svg>
                         <span>Editar</span>
                     </Link>
-                    <ConfirmDelete url={route('research.destroy', { research: research.id })} />
-                    <Link href={route('questionnaires.index', {respondable: 'research', id: research.id})} className='btn btn-blue' prefetch>
-                        <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="size-5"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M9.615 20h-2.615a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8" /><path d="M14 19l2 2l4 -4" /><path d="M9 8h4" /><path d="M9 12h2" /></svg>
-                        <span>Questionários</span>
-                    </Link>
-                    <Link href={route('research.comparison.index', { research, search: '', page: 1 })} className='btn btn-green' prefetch>
-                        <svg  xmlns="http://www.w3.org/2000/svg"  width={24}  height={24}  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  strokeWidth={2}  strokeLinecap="round"  strokeLinejoin="round"  className="size-5"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 8l-4 4l4 4" /><path d="M17 8l4 4l-4 4" /><path d="M14 4l-4 16" /></svg>
-                        <span>Códigos</span>
-                    </Link>
+                    <ConfirmDelete url={route('questionnaires.questions.destroy', { question: question.id, questionnaire: questionnaire.id })} />
                 </Panel>
             </div>
         </>

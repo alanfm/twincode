@@ -9,7 +9,8 @@ function Create() {
         title: '',
         description: '',
         author: '',
-        institution: ''
+        institution: '',
+        status: ''
     });
 
     const handleSubmit = (e) => {

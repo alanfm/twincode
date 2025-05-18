@@ -108,7 +108,7 @@ class QuestionnaireController extends Controller
             $instance->load('research');
 
         return Inertia::render('Admin/Questionnaire/Show', [
-            'questionnaire' => $questionnaire,
+            'questionnaire' => $questionnaire->load('respondable'),
             'respondable' => $instance,
             'respondable_id' => $id,
             'respondable_type' => $respondable,

@@ -48,6 +48,10 @@ body {
     @apply inline-flex gap-1 items-center font-normal px-4 py-2 rounded-md transition focus:outline-none cursor-pointer;
 }
 
+.btn:disabled {
+    @apply cursor-not-allowed opacity-50;
+}
+
 .btn-neutral {
     @apply  text-white bg-neutral-500 hover:bg-neutral-600 focus:ring-neutral-400 focus:border-neutral-400;
 }

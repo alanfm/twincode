@@ -3,6 +3,7 @@ import ConfirmDelete from '@/Components/Twincode/Dashboard/ConfirmDelete';
 import Panel from '@/Components/Twincode/Dashboard/Panel';
 import DashboardLayout from '@/Layouts/DashboardLayout';
 import { Head, Link } from '@inertiajs/react';
+import StatusBadge from './partials/StatusBadge';
 
 function Show({ research }) {
     return (
@@ -16,6 +17,10 @@ function Show({ research }) {
             <div className="flex flex-col gap-4 h-full">
                 <h1 className="text-2xl font-extrabold">Datalhes da Pesquisa</h1>
                 <Panel className={'h-full flex flex-col gap-4'}>
+                    <div className="">
+                        <p>Situação:</p>
+                        <p className='font-normal'><StatusBadge status={research.status} /></p>
+                    </div>
                     <div className="">
                         <p>Título:</p>
                         <p className='font-normal'>{research.title}</p>
@@ -31,6 +36,11 @@ function Show({ research }) {
                     <div className="">
                         <p>Instituição:</p>
                         <p className='font-normal'>{research.institution}</p>
+                    </div>
+                    <div className="">
+                        <p>Código:</p>
+                        <p className='font-normal'>{research.key}</p>
+                        <p className='text-xs'>Código usado para preenchimento da pesquisa pelos participantes</p>
                     </div>
                     <div className="">
                         <p>Criado em:</p>

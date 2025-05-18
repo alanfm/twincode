@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\Admin\ComparisonController;
+use App\Http\Controllers\Admin\OptionController;
 use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\Admin\QuestionnaireController;
 use App\Http\Controllers\Admin\ResearchController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\DataCollectionController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -42,5 +44,15 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         ->whereNumber('id')
         ->whereAlpha('respondable');
     Route::resource('questionnaires.questions', QuestionController::class);
+    Route::resource('questions.options', OptionController::class)->only(['store', 'destroy']);
     Route::resource('users', UserController::class);
 });
+
+Route::prefix('research')->group(function () {
+    Route::get('/{key}', [DataCollectionController::class, 'index'])->name('public.research.index');
+    Route::post('/{key}', [DataCollectionController::class, 'accepted'])->name('public.research.accepted');
+    Route::get('/{key}/participant', [DataCollectionController::class, 'participant'])->name('public.research.participant');
+    Route::post('/{key}/participant', [DataCollectionController::class, 'storeParticipant'])->name('public.research.participant.store');
+    Route::get('/{key}/comparison', [DataCollectionController::class, 'comparison'])->name('public.research.comparison');
+    Route::get('/{key}/conclusion', [DataCollectionController::class, 'conclusion'])->name('public.research.conclusion');
+})->middleware(['web', 'unique.session']);

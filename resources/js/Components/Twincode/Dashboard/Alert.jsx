@@ -31,6 +31,16 @@ function Alert({ type = 'info', message, show }) {
         setVisible(false);
     };
 
+    useEffect(() => {
+        let debounce = setTimeout(() => {
+            closeAlert();
+        }, 5000);
+
+        return () => {
+            clearTimeout(debounce);
+        }
+    }, []);
+
     if (!visible) return null;
 
     return (

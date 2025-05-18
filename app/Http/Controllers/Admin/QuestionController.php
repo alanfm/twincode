@@ -31,7 +31,7 @@ class QuestionController extends Controller
     public function create(Questionnaire $questionnaire): Response
     {
         return Inertia::render('Admin/Question/Create', [
-            'questionnaire' => $questionnaire,
+            'questionnaire' => $questionnaire->load('respondable'),
         ]);
     }
 
@@ -41,8 +41,8 @@ class QuestionController extends Controller
     public function store(StoreQuestionRequest $request, Questionnaire $questionnaire)
     {
         try {
-            $question = Question::create($request->validated());
-            return Redirect::route('questionnaires.questions.index', [$questionnaire, $question])->with('alert', [
+            $question = $questionnaire->questions()->create($request->validated());
+            return Redirect::route('questionnaires.questions.show', [$questionnaire, $question])->with('alert', [
                 'type' => 'success',
                 'message' => 'Registro criado com sucesso',
             ]);
@@ -61,8 +61,8 @@ class QuestionController extends Controller
     public function show(Questionnaire $questionnaire, Question $question): Response
     {
         return Inertia::render('Admin/Question/Show', [
-            'questionnaire' => $questionnaire,
-            'question' => $question,
+            'questionnaire' => $questionnaire->load('respondable'),
+            'question' => $question->load('options'),
         ]);
     }
 
@@ -72,7 +72,7 @@ class QuestionController extends Controller
     public function edit(Questionnaire $questionnaire, Question $question): Response
     {
         return Inertia::render('Admin/Question/Edit', [
-            'questionnaire' => $questionnaire,
+            'questionnaire' => $questionnaire->load('respondable'),
             'question' => $question,
         ]);
     }
@@ -84,7 +84,7 @@ class QuestionController extends Controller
     {
         try {
             $question->update($request->validated());
-            return Redirect::route('questionnaires.questions.index', [$questionnaire, $question])->with('alert', [
+            return Redirect::route('questionnaires.questions.show', [$questionnaire, $question])->with('alert', [
                 'type' => 'success',
                 'message' => 'Registro atualizado com sucesso',
             ]);

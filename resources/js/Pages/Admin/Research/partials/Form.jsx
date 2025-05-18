@@ -2,6 +2,23 @@ function Form({ data, setData, errors }) {
     return (
         <>
             <div className="flex flex-col">
+                <label htmlFor="status">Situação:</label>
+                <select
+                    name='status'
+                    id='status'
+                    value={data.status}
+                    className='rounded-md'
+                    onChange={(e) => setData('status', e.target.value)}
+                    required
+                >
+                    <option value='' disabled>Selecione</option>
+                    <option value='active'>Ativo</option>
+                    <option value='inactive'>Inativo</option>
+                    <option value='arcarchived'>Arquivado</option>
+                </select>
+                {errors.status && <p className='text-red-500 text-sm'>{errors.status}</p>}
+            </div>
+            <div className="flex flex-col">
                 <label htmlFor="title">Título:</label>
                 <input
                     type='text'
@@ -11,6 +28,8 @@ function Form({ data, setData, errors }) {
                     className='rounded-md'
                     onChange={(e) => setData('title', e.target.value)}
                     placeholder='Título da pesquisa'
+                    autoComplete='off'
+                    required
                 />
                 {errors.title && <p className='text-red-500 text-sm'>{errors.title}</p>}
             </div>
@@ -23,6 +42,7 @@ function Form({ data, setData, errors }) {
                     className='rounded-md'
                     onChange={(e) => setData('description', e.target.value)}
                     placeholder='Descrição da pesquisa'
+                    required
                 />
                 {errors.description && <p className='text-red-500 text-sm'>{errors.description}</p>}
             </div>
@@ -36,6 +56,8 @@ function Form({ data, setData, errors }) {
                     className='rounded-md'
                     onChange={(e) => setData('author', e.target.value)}
                     placeholder='Descrição da pesquisa'
+                    autoComplete='off'
+                    required
                 />
                 {errors.author && <p className='text-red-500 text-sm'>{errors.author}</p>}
             </div>
@@ -49,6 +71,8 @@ function Form({ data, setData, errors }) {
                     className='rounded-md'
                     onChange={(e) => setData('institution', e.target.value)}
                     placeholder='Descrição da pesquisa'
+                    autoComplete='off'
+                    required
                 />
                 {errors.institution && <p className='text-red-500 text-sm'>{errors.institution}</p>}
             </div>

@@ -11,14 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('research', function (Blueprint $table) {
+        Schema::create('participant_option', function (Blueprint $table) {
             $table->id();
-            $table->string('key')->unique()->index();
-            $table->string('title');
-            $table->text('description');
-            $table->string('author');
-            $table->string('institution');
-            $table->string('status')->default('inactive');
+            $table->foreignId('option_id')->constrained('options')->onDelete('cascade');
+            $table->foreignId('participant_id')->constrained('participants')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -28,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('research');
+        Schema::dropIfExists('participant_option');
     }
 };
