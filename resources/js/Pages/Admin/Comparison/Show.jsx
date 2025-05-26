@@ -1,3 +1,4 @@
+import Alert from '@/Components/Twincode/Dashboard/Alert';
 import Breadcrumb from '@/Components/Twincode/Dashboard/Breadcrumb';
 import ConfirmDelete from '@/Components/Twincode/Dashboard/ConfirmDelete';
 import Panel from '@/Components/Twincode/Dashboard/Panel';
@@ -17,6 +18,7 @@ function Show({ research, comparison }) {
     return (
         <>
             <Head title="Detalhes" />
+            <Alert />
             <Breadcrumb items={[
                 { label: 'Dashboard', href: route('dashboard') },
                 { label: 'Pesquisas', href: route('research.index', { search: '', page: '' }) },

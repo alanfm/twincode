@@ -120,6 +120,10 @@ body {
     @apply bg-rose-500 hover:bg-rose-600 text-white focus:ring-rose-400 focus:border-rose-400;
 }
 
+.code {
+    font-size: 18px;
+}
+
 code {
     counter-reset: step;
     counter-increment: step 0;

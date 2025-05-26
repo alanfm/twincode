@@ -2,13 +2,16 @@ import Breadcrumb from '@/Components/Twincode/Dashboard/Breadcrumb';
 import ConfirmDelete from '@/Components/Twincode/Dashboard/ConfirmDelete';
 import Panel from '@/Components/Twincode/Dashboard/Panel';
 import DashboardLayout from '@/Layouts/DashboardLayout';
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, usePage } from '@inertiajs/react';
 import StatusBadge from './partials/StatusBadge';
+import Alert from '@/Components/Twincode/Dashboard/Alert';
+import ToolTip from '@/Components/Twincode/Dashboard/Tooltip';
 
 function Show({ research }) {
     return (
         <>
             <Head title="Detalhes" />
+            <Alert />
             <Breadcrumb items={[
                 { label: 'Dashboard', href: route('dashboard') },
                 { label: 'Pesquisas', href: route('research.index') },
@@ -43,6 +46,20 @@ function Show({ research }) {
                         <p className='text-xs'>Código usado para preenchimento da pesquisa pelos participantes</p>
                     </div>
                     <div className="">
+                        <p>Link de acesso público:</p>
+                        <p className='font-normal flex gap-2 items-center'>
+                            <span>{route('public.research.index', {key: research.key})}</span>
+                            <ToolTip tooltip="Copiar link">
+                                <button
+                                    className='cursor-pointer'
+                                    onClick={() => navigator.clipboard.writeText(route('public.research.index', {key: research.key}))}
+                                >
+                                    <svg  xmlns="http://www.w3.org/2000/svg"  width={24}  height={24}  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  strokeWidth={2}  strokeLinecap="round"  strokeLinejoin="round"  className="size-5"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7m0 2.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667z" /><path d="M4.012 16.737a2.005 2.005 0 0 1 -1.012 -1.737v-10c0 -1.1 .9 -2 2 -2h10c.75 0 1.158 .385 1.5 1" /></svg>
+                                </button>
+                            </ToolTip>
+                        </p>
+                    </div>
+                    <div className="">
                         <p>Criado em:</p>
                         <p className='font-normal'>{research.created_at}</p>
                     </div>
@@ -68,6 +85,10 @@ function Show({ research }) {
                     <Link href={route('research.comparison.index', { research, search: '', page: 1 })} className='btn btn-green' prefetch>
                         <svg  xmlns="http://www.w3.org/2000/svg"  width={24}  height={24}  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  strokeWidth={2}  strokeLinecap="round"  strokeLinejoin="round"  className="size-5"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 8l-4 4l4 4" /><path d="M17 8l4 4l-4 4" /><path d="M14 4l-4 16" /></svg>
                         <span>Códigos</span>
+                    </Link>
+                    <Link href={route('research.reports', { research })} className='btn btn-sky' prefetch>
+                        <svg  xmlns="http://www.w3.org/2000/svg"  width={24}  height={24}  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  strokeWidth={2}  strokeLinecap="round"  strokeLinejoin="round"  className="size-5"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h5.697" /><path d="M18 12v-5a2 2 0 0 0 -2 -2h-2" /><path d="M8 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" /><path d="M8 11h4" /><path d="M8 15h3" /><path d="M16.5 17.5m-2.5 0a2.5 2.5 0 1 0 5 0a2.5 2.5 0 1 0 -5 0" /><path d="M18.5 19.5l2.5 2.5" /></svg>
+                        <span>Relatórios</span>
                     </Link>
                 </Panel>
             </div>

@@ -2,13 +2,12 @@ import Breadcrumb from '@/Components/Twincode/Dashboard/Breadcrumb';
 import Panel from '@/Components/Twincode/Dashboard/Panel';
 import Pagination from '@/Components/Twincode/Pagination';
 import DashboardLayout from '@/Layouts/DashboardLayout';
-import { Head, Link, router, usePage } from '@inertiajs/react';
+import { Head, Link, router } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 import DataTable from './partials/DataTable';
 import Alert from '@/Components/Twincode/Dashboard/Alert';
 
 function Index({ data, count, page, search }) {
-    const { flash } = usePage().props;
     const [searchLocal, setSearchLocal] = useState(search);
     const [pageLocal, setPageLocal] = useState(page);
 
@@ -26,7 +25,7 @@ function Index({ data, count, page, search }) {
     return (
         <>
             <Head title="Pesquisas" />
-            {!!flash.alert && <Alert type={flash.alert.type} message={flash.alert.message} show={!!flash.alert} />}
+            <Alert />
             <Breadcrumb items={[
                 { label: 'Principal', href: route('dashboard') },
                 { label: 'Pesquisas', href: route('research.index', {search: searchLocal, page: pageLocal}) }

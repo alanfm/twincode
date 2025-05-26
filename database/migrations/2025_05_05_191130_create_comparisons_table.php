@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('description');
             $table->string('language');
-            $table->text('snippet_code_1');
-            $table->text('snippet_code_2');
+            $table->mediumText('snippet_code_1');
+            $table->mediumText('snippet_code_2');
             $table->text('observation')->nullable();
             $table->foreignId('research_id')->constrained()->onDelete('cascade');
             $table->timestamps();

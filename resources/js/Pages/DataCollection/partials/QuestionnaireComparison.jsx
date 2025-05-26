@@ -22,6 +22,7 @@ function QuestionnaireComparison({ questionnaire, handleCheckboxChange, handleCh
                                 onChange={handleChange}
                                 value={data[question.id] || ''}
                                 required
+                                autoComplete="off"
                             />
                         )}
                         {question.options && question.type === 'checkbox' && (
@@ -58,8 +59,8 @@ function QuestionnaireComparison({ questionnaire, handleCheckboxChange, handleCh
                                 ))}
                             </div>
                         )}
-                        {errors[question.id] && (
-                            <p className="text-red-500 text-sm">{errors[question.id]}</p>
+                        {errors[`answers.${question.id}`] && (
+                            <p className="text-red-500 text-sm">{errors[`answers.${question.id}`]}</p>
                         )}
                     </div>
                 )

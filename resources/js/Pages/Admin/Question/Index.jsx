@@ -6,6 +6,7 @@ import { Head, Link, router } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 import DataTable from './partials/DataTable';
 import breadcrumbsItems, { respondableTypeParse } from '@/helpers/breadcrumbsItems';
+import Alert from '@/Components/Twincode/Dashboard/Alert';
 
 function Index({ data, count, page, search, questionnaire }) {
     const [searchLocal, setSearchLocal] = useState(search);
@@ -25,6 +26,7 @@ function Index({ data, count, page, search, questionnaire }) {
     return (
         <>
             <Head title="Questões" />
+            <Alert />
             <Breadcrumb items={[
                 ...breadcrumbsItems('show', '', '', '', questionnaire),
                 {label: `Questões`, href: route('questionnaires.questions.index', { questionnaire: questionnaire.id, search: '', page: 1 })},

@@ -128,7 +128,7 @@ class QuestionnaireController extends Controller
 
         $instance = (new $class)->findOrFail($id);
 
-        if ($respondable == 'comparison')
+        if ($respondable === 'comparison')
             $instance->load('research');
 
         return Inertia::render('Admin/Questionnaire/Edit', [

@@ -2,7 +2,7 @@ import Breadcrumb from '@/Components/Twincode/Dashboard/Breadcrumb';
 import ConfirmDelete from '@/Components/Twincode/Dashboard/ConfirmDelete';
 import Panel from '@/Components/Twincode/Dashboard/Panel';
 import DashboardLayout from '@/Layouts/DashboardLayout';
-import { Head, Link, usePage } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import BadgeTypeQuestion from './partials/BadgeTypeQuestion';
 import breadcrumbsItems from '@/helpers/breadcrumbsItems';
 import AddOption from './partials/AddOption';
@@ -10,11 +10,10 @@ import DeleteOption from './partials/DeleteOption';
 import Alert from '@/Components/Twincode/Dashboard/Alert';
 
 function Show({ question, questionnaire }) {
-    const { flash } = usePage().props;
     return (
         <>
             <Head title="Detalhes" />
-            {!!flash.alert && <Alert type={flash.alert.type} message={flash.alert.message} show={!!flash.alert} />}
+            <Alert />
             <Breadcrumb items={[
                 ...breadcrumbsItems('show', '', '', '', questionnaire),
                 { label: 'Questões', href: route('questionnaires.questions.index', { questionnaire: questionnaire.id }) },

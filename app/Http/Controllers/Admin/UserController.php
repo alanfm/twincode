@@ -95,7 +95,7 @@ class UserController extends Controller
             ]);
         } catch (Exception $e) {
             Log::error('Erro ao atualizar o registro: ' . $e->getMessage());
-            return Redirect::back()->with('alert', [
+            return Redirect::route('users.edit', $user)->with('alert', [
                 'message' => 'Erro ao atualizar o registro.',
                 'type' => 'error'
             ]);
@@ -110,13 +110,13 @@ class UserController extends Controller
         try {
             $user->delete();
 
-            return Redirect::route('users.index')->with('alert', [
+            return Redirect::route('users.index', ['search' => '', 'page' => 1])->with('alert', [
                 'message' => 'Registro apagado com sucesso.',
                 'type' => 'success'
             ]);
         } catch (Exception $e) {
             Log::error('Erro ao apagar o registro: ' . $e->getMessage());
-            return Redirect::back()->with('alert', [
+            return Redirect::route('users.show', $user)->with('alert', [
                 'message' => 'Erro ao apagar o registro.',
                 'type' => 'error'
             ]);

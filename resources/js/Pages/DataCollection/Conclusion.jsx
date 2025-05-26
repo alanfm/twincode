@@ -3,10 +3,8 @@ import { Head, Link, useForm } from "@inertiajs/react";
 import QuestionnaireInitial from "./partials/QuestionnaireInitial";
 import { useCallback, useEffect, useState } from "react";
 
-function Participant({ research, formData }) {
+function Conclusion({ research, formData, lastPage }) {
     const { data, setData, post, processing, errors, reset } = useForm({
-        name: formData.name || '',
-        email: formData.email || '',
         answers: formData.answers || [],
     });
 
@@ -34,7 +32,7 @@ function Participant({ research, formData }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        post(route('public.research.participant.store', { key: research.key }), {
+        post(route('public.research.store', { key: research.key }), {
             data,
             preserveState: true,
             preserveScroll: true,
@@ -82,15 +80,15 @@ function Participant({ research, formData }) {
                                 <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="size-5"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M9 12l2 2l4 -4" /><path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z" /></svg>
                             </li>
                             <li className="font-semibold -mt-0.5">&mdash;</li>
+                            <li className="text-green-500">
+                                <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="size-5"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M9 12l2 2l4 -4" /><path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z" /></svg>
+                            </li>
+                            <li className="font-semibold -mt-0.5">&mdash;</li>
+                            <li className="text-green-500">
+                                <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="size-5"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M9 12l2 2l4 -4" /><path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z" /></svg>
+                            </li>
+                            <li className="font-semibold -mt-0.5">&mdash;</li>
                             <li className="text-blue-500">
-                                <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="size-5"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z" /></svg>
-                            </li>
-                            <li className="font-semibold -mt-0.5">&mdash;</li>
-                            <li>
-                                <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="size-5"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z" /></svg>
-                            </li>
-                            <li className="font-semibold -mt-0.5">&mdash;</li>
-                            <li>
                                 <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="size-5"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z" /></svg>
                             </li>
                         </ul>
@@ -101,39 +99,9 @@ function Participant({ research, formData }) {
                         <form action="">
                             <div className="bg-white shadow-md w-4xl mx-auto py-8 rounded-md flex flex-col gap-4 mb-4">
                                 <div className="w-full mx-auto flex flex-col gap-4">
-                                    <h1 className="text-lg font-medium text-center">Dados do Participante</h1>
+                                    <h1 className="text-lg font-medium text-center">Ultima etapa</h1>
                                 </div>
                                 <div className="w-full mx-auto flex flex-col gap-4 p-4">
-                                    <div className="w-full flex flex-col">
-                                        <label htmlFor="name" className="font-normal">1 - Nome:</label>
-                                        <input
-                                            type="text"
-                                            name='name'
-                                            id='name'
-                                            value={data.name}
-                                            className='rounded-md'
-                                            onChange={(e) => setData('name', e.target.value)}
-                                            placeholder='Nome do participante'
-                                            autoComplete="off"
-                                            required
-                                        />
-                                        {errors.name && <p className='text-red-500 text-sm'>{errors.name}</p>}
-                                    </div>
-                                    <div className="w-full flex flex-col">
-                                        <label htmlFor="email" className="font-normal">2 - Email:</label>
-                                        <input
-                                            type="email"
-                                            name='email'
-                                            id='email'
-                                            value={data.email}
-                                            className='rounded-md'
-                                            onChange={(e) => setData('email', e.target.value)}
-                                            placeholder='Email do participante'
-                                            autoComplete="off"
-                                            required
-                                        />
-                                        {errors.email && <p className='text-red-500 text-sm'>{errors.email}</p>}
-                                    </div>
                                     {research.questionnaires.map((questionnaire, i) => (
                                         <fieldset className="border border-gray-300 rounded-md p-4 flex flex-col gap-4" key={questionnaire.id}>
                                             <legend className="text-lg font-medium">{questionnaire.description}</legend>
@@ -153,20 +121,26 @@ function Participant({ research, formData }) {
                     </div>
                 </main>
                 <footer className="flex justify-between gap-4 py-2 px-4 bg-neutral-200">
-                    <Link href={route('public.research.index', { key: research.key })} className="btn btn-neutral" prefetch>Anterior</Link>
+                    <Link href={route('public.research.comparison', { key: research.key, page: lastPage })} className="btn btn-neutral" prefetch>Anterior</Link>
                     <span>&nbsp;</span>
-                    {/* <button className="btn btn-green">Responder</button> */}
                     <button
+                        className="btn btn-green"
+                        onClick={handleSubmit}
+                        disabled={processing || (data.answers.length === 0)}
+                    >
+                        Salvar e concluir
+                    </button>
+                    {/* <button
                         onClick={handleSubmit}
                         className="btn btn-neutral"
                         disabled={(data.name === '' || data.name === null || data.name === undefined) || (data.email === '' || data.email === null || data.email === undefined)}
                     >
                         Próximo
-                    </button>
+                    </button> */}
                 </footer>
             </div>
         </>
     );
 }
 
-export default Participant;
+export default Conclusion;

@@ -6,7 +6,6 @@ const breadcrumbsItems = (page, respondable, respondable_type, respondable_id, q
     if (questionnaire && respondable_type == 'research') {
         respondable_type = respondableTypeParse(questionnaire.respondable_type);
         respondable_id = questionnaire.respondable_id;
-        respondable = questionnaire.respondable;
     }
 
     if (respondable_type == 'research') {

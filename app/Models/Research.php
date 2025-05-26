@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Http\Request;
 
@@ -19,9 +20,9 @@ class Research extends Model
      * @var array<string>
      */
     public const STATUS = [
-        'active',
-        'inactive',
-        'archived',
+        'active' => 'active',
+        'inactive' => 'inactive',
+        'archived' => 'archived',
     ];
 
     /**
@@ -97,13 +98,18 @@ class Research extends Model
      *
      * @return MorphOne
      */
-    public function questionnaire(): MorphOne
+    public function questionnaires(): MorphMany
     {
-        return $this->morphOne(Questionnaire::class, 'respondable');
+        return $this->morphMany(Questionnaire::class, 'respondable');
     }
 
     public function scopeGetByKey(Builder $query, string $key): Research
     {
         return $query->where('key', $key)->firstOrFail();
+    }
+
+    public function isActive(): bool
+    {
+        return $this->status === 'active';
     }
 }

@@ -1,4 +1,5 @@
 function Form({ data, setData, errors }) {
+    console.log('data', data);
     return (
         <>
             <div className="flex flex-col">
@@ -14,7 +15,7 @@ function Form({ data, setData, errors }) {
                     <option value='' disabled>Selecione</option>
                     <option value='active'>Ativo</option>
                     <option value='inactive'>Inativo</option>
-                    <option value='arcarchived'>Arquivado</option>
+                    <option value='archived'>Arquivado</option>
                 </select>
                 {errors.status && <p className='text-red-500 text-sm'>{errors.status}</p>}
             </div>

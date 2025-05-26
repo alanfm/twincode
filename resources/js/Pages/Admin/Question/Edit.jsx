@@ -4,6 +4,7 @@ import DashboardLayout from '@/Layouts/DashboardLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
 import Form from './partials/Form';
 import breadcrumbsItems from '@/helpers/breadcrumbsItems';
+import Alert from '@/Components/Twincode/Dashboard/Alert';
 
 function Edit({ question, questionnaire }) {
     const { data, setData, put, processing, errors } = useForm({
@@ -18,6 +19,7 @@ function Edit({ question, questionnaire }) {
     return (
         <DashboardLayout>
             <Head title="Editar Questão" />
+            <Alert />
             <Breadcrumb items={[
                 ...breadcrumbsItems('show', '', '', '', questionnaire),
                 { label: 'Questões', href: route('questionnaires.questions.index', { questionnaire: questionnaire.id }) },

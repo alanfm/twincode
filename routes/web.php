@@ -39,6 +39,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         return Inertia::render('Dashboard');
     })->name('admin.home');
     Route::resource('research', ResearchController::class);
+    Route::get('research/{research}/reports', [ResearchController::class, 'report'])->name('research.reports');
     Route::resource('research.comparison', ComparisonController::class);
     Route::resource('{respondable}/{id}/questionnaires', QuestionnaireController::class)
         ->whereNumber('id')
@@ -54,5 +55,7 @@ Route::prefix('research')->group(function () {
     Route::get('/{key}/participant', [DataCollectionController::class, 'participant'])->name('public.research.participant');
     Route::post('/{key}/participant', [DataCollectionController::class, 'storeParticipant'])->name('public.research.participant.store');
     Route::get('/{key}/comparison', [DataCollectionController::class, 'comparison'])->name('public.research.comparison');
+    Route::post('/{key}/comparison', [DataCollectionController::class, 'storeComparison'])->name('public.research.comparison.store');
     Route::get('/{key}/conclusion', [DataCollectionController::class, 'conclusion'])->name('public.research.conclusion');
+    Route::post('/{key}/conclusion', [DataCollectionController::class, 'store'])->name('public.research.store');
 })->middleware(['web', 'unique.session']);

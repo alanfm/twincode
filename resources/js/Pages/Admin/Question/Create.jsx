@@ -4,6 +4,7 @@ import DashboardLayout from '@/Layouts/DashboardLayout';
 import { Head, Link, router, useForm } from '@inertiajs/react';
 import Form from './partials/Form';
 import breadcrumbsItems from '@/helpers/breadcrumbsItems';
+import Alert from '@/Components/Twincode/Dashboard/Alert';
 
 function Create({ questionnaire }) {
     const { data, setData, post, processing, errors } = useForm({
@@ -19,6 +20,7 @@ function Create({ questionnaire }) {
     return (
         <DashboardLayout>
             <Head title="Cadastrar Questão" />
+            <Alert />
             <Breadcrumb items={[
                 ...breadcrumbsItems('show', '', '', '', questionnaire),
                 { label: 'Questões', href: route('questionnaires.questions.index', { questionnaire: questionnaire.id }) },

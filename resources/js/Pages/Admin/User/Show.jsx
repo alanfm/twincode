@@ -1,3 +1,4 @@
+import Alert from '@/Components/Twincode/Dashboard/Alert';
 import Breadcrumb from '@/Components/Twincode/Dashboard/Breadcrumb';
 import ConfirmDelete from '@/Components/Twincode/Dashboard/ConfirmDelete';
 import Panel from '@/Components/Twincode/Dashboard/Panel';
@@ -8,6 +9,7 @@ function Show({ user }) {
     return (
         <DashboardLayout>
             <Head title="Detalhes" />
+            <Alert />
             <Breadcrumb items={[
                 { label: 'Dashboard', href: route('dashboard') },
                 { label: 'Usuários', href: route('users.index') },

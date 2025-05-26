@@ -1,9 +1,10 @@
+import Alert from "@/Components/Twincode/Dashboard/Alert";
 import Logo from "@/Components/Twincode/Logo";
-import { Head, useForm } from "@inertiajs/react";
+import { Head, useForm, usePage } from "@inertiajs/react";
 
-function Index({ research }) {
+function Index({ research, formData }) {
     const { data, setData, post, processing, errors, reset } = useForm({
-        accept: false,
+        accept: formData.accept || false,
     });
 
     const handleSubmit = (e) => {
@@ -19,6 +20,7 @@ function Index({ research }) {
     return (
         <>
             <Head title={research.title} />
+            <Alert />
             <div className="max-h-screen h-screen max-w-screen w-screen flex flex-col">
                 <header className="bg-neutral-200 py-1 flex justify-between items-center px-4 flex-shrink-0">
                     <div className="">
