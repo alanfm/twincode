@@ -20,7 +20,7 @@ function QuestionnaireModal({
                 <span>Perguntas</span>
             </button>
             <Modal show={show} onClose={() => setShow(false)} maxWidth={'2xl'}>
-                <form className="flex flex-col gap-4 p-4" onSubmit={handleSubmit}>
+                <form className="flex flex-col gap-4 p-4 overflow-y-auto" onSubmit={handleSubmit}>
                     <h1 className="text-xl font-bold">Questionário sobre o Código</h1>
                     {questionnaire.map((q, i) => {
                         return (

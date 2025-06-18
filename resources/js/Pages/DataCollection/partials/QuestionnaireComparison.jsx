@@ -28,7 +28,7 @@ function QuestionnaireComparison({ questionnaire, handleCheckboxChange, handleCh
                         {question.options && question.type === 'checkbox' && (
                             <div className="flex flex-col gap-2">
                                 {question.options.map((option) => (
-                                    <label key={option.id} className="flex items-center gap-2">
+                                    <label key={option.id} className="flex flex-1 items-center gap-2">
                                         <input
                                             type="checkbox"
                                             name={question.id}
@@ -43,9 +43,9 @@ function QuestionnaireComparison({ questionnaire, handleCheckboxChange, handleCh
                             </div>
                         )}
                         {question.options && question.type === 'radio' && (
-                            <div className="flex flex-col gap-2">
+                            <div className="flex flex-wrap gap-2">
                                 {question.options.map((option) => (
-                                    <label key={option.id} className="flex items-center gap-2">
+                                    <label key={option.id} className="flex flex-1 items-center gap-2">
                                         <input
                                             type="radio"
                                             name={question.id}
