@@ -15,16 +15,21 @@ TwinCode é uma ferramenta computacional projetada para facilitar e aprimorar a 
 ## Seções da Documentação
 
 ### [Guia do Usuário](user-guide/index.md)
+
 Descubra como configurar um estudo, gerenciar códigos para comparação e criar questionários.
 
-### [Guia do Participante](participant-guide/index.md)
+### [Guia do Participante](user-guide/participant-experience.md)
+
 Instruções para os participantes da pesquisa sobre como interagir com a interface do TwinCode e fornecer feedback.
 
 ### [Arquitetura e Tecnologias](developer-guide/architecture.md)
+
 Detalhes técnicos sobre a estrutura do TwinCode e as tecnologias utilizadas em seu desenvolvimento.
 
 ### [Guia de Contribuição](developer-guide/contributing.md)
+
 Informações para desenvolvedores que desejam contribuir com o projeto.
 
 ### [Perguntas Frequentes (FAQ)](faq.md)
+
 Respostas para as dúvidas mais comuns sobre o TwinCode.
