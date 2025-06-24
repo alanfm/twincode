@@ -75,6 +75,16 @@ class Question extends Model
     }
 
     /**
+     * Get the answers for the question.
+     *
+     * @return HasMany<Answer, Question>
+     */
+    public function answers(): HasMany
+    {
+        return $this->hasMany(Answer::class);
+    }
+
+    /**
      * Scope a query to only include questions that match the search criteria.
      *
      * @param  Builder  $query

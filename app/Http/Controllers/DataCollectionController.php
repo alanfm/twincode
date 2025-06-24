@@ -74,7 +74,7 @@ class DataCollectionController extends Controller
 
         Session::put('data', [...Session::get('data', []), ...$request->all()]);
 
-        return Redirect::route('public.research.comparison', ['key' => $key, 'page' => 1]);
+        return Redirect::route('public.research.comparison', ['key' => $key, 'page' => $request->page ?? 1]);
     }
 
     public function comparison(Request $request, string $key)
@@ -113,7 +113,7 @@ class DataCollectionController extends Controller
 
         Session::put('data', [...Session::get('data', []), ...$request->all()]);
 
-        return Redirect::route('public.research.comparison', ['key' => $key]);
+        return Redirect::route('public.research.comparison', ['key' => $key, 'page' => $request->page ?? 1]);
     }
 
     public function conclusion(Request $request, string $key)

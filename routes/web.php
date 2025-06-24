@@ -40,6 +40,8 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
     })->name('admin.home');
     Route::resource('research', ResearchController::class);
     Route::get('research/{research}/reports', [ResearchController::class, 'report'])->name('research.reports');
+    Route::get('research/{research}/reports/{participant}/participant', [ResearchController::class, 'reportShow'])->name('research.reports.show');
+    Route::get('research/{research}/reports/download', [ResearchController::class, 'reportDownload'])->name('research.reports.download');
     Route::resource('research.comparison', ComparisonController::class);
     Route::resource('{respondable}/{id}/questionnaires', QuestionnaireController::class)
         ->whereNumber('id')

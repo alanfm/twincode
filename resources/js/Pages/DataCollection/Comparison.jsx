@@ -53,7 +53,7 @@ function Participant({ research, comparison, formData, page }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        post(route('public.research.comparison.store', { key: research.key }), { data, preserveState: true, preserveScroll: true });
+        post(route('public.research.comparison.store', { key: research.key, page }), { data, preserveState: true, preserveScroll: true });
     }
 
     const handleChange = (e) => {
