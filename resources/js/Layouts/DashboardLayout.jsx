@@ -8,7 +8,7 @@ function DashboardLayout({ children }) {
         <RootLayout>
             <div className="flex justify-between max-h-screen h-screen max-w-screen w-screen overflow-hidden">
                 <Sidebar />
-                <div className="flex flex-col justify-between w-10/12 max-w-[calc(10/12*100)]">
+                <div className="flex flex-col justify-between w-10/12 max-w-[calc(10/12*100%)] h-full">
                     <main className="flex flex-col gap-4 flex-grow overflow-x-auto p-4 w-full max-w-[calc(100vw-20rem)]">
                         {children}
                     </main>
