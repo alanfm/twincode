@@ -27,6 +27,7 @@ class UpdateResearchRequest extends FormRequest
             'author' => 'required|string|max:255',
             'institution' => 'required|string|max:255',
             'status' => 'required|string|in:active,inactive,archived',
+            'acceptance_terms' => 'required|string',
         ];
     }
 }

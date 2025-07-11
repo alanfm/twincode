@@ -29,6 +29,7 @@ class StoreResearchRequest extends FormRequest
             'institution' => 'required|string|max:255',
             'key' => 'required|string|max:255|unique:research,key',
             'status' => 'required|string|in:active,inactive,archived',
+            'acceptance_terms' => 'required|string',
         ];
     }
 

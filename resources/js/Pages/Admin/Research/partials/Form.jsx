@@ -1,3 +1,20 @@
+import Editor, {
+    Toolbar,
+    BtnBold,
+    BtnBulletList,
+    BtnClearFormatting,
+    BtnItalic,
+    // BtnLink,
+    BtnNumberedList,
+    // BtnRedo,
+    BtnStrikeThrough,
+    // BtnStyles,
+    BtnUnderline,
+    BtnUndo,
+    // HtmlButton,
+    Separator,
+} from 'react-simple-wysiwyg';
+
 function Form({ data, setData, errors }) {
     console.log('data', data);
     return (
@@ -76,6 +93,28 @@ function Form({ data, setData, errors }) {
                     required
                 />
                 {errors.institution && <p className='text-red-500 text-sm'>{errors.institution}</p>}
+            </div>
+            <div className="flex flex-col">
+                <label htmlFor="acceptance_terms">Termos de Aceite para Participação na Pesquisa:</label>
+                <Editor value={data.acceptance_terms} onChange={(e) => setData('acceptance_terms', e.target.value)}>
+                    <Toolbar>
+                        <BtnBold />
+                        <BtnItalic />
+                        <BtnUnderline />
+                        <Separator />
+                        {/* <BtnStrikeThrough /> */}
+                        <BtnBulletList />
+                        <BtnNumberedList />
+                        <Separator />
+                        <BtnClearFormatting />
+                        {/* <BtnLink /> */}
+                        {/* <HtmlButton /> */}
+                        {/* <BtnStyles /> */}
+                        {/* <BtnRedo /> */}
+                        {/* <BtnUndo /> */}
+                    </Toolbar>
+                </Editor>
+                {errors.acceptance_terms && <p className='text-red-500 text-sm'>{errors.acceptance_terms}</p>}
             </div>
         </>
     );

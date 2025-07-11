@@ -3,6 +3,8 @@ import Panel from '@/Components/Twincode/Dashboard/Panel';
 import DashboardLayout from '@/Layouts/DashboardLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
 import Form from './partials/Form';
+import acceptanceTermsText from '@/helpers/acceptanceTermsText';
+
 
 function Create() {
     const { data, setData, post, processing, errors } = useForm({
@@ -10,7 +12,8 @@ function Create() {
         description: '',
         author: '',
         institution: '',
-        status: ''
+        status: '',
+        acceptance_terms: acceptanceTermsText
     });
 
     const handleSubmit = (e) => {

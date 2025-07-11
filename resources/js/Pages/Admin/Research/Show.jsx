@@ -17,7 +17,7 @@ function Show({ research }) {
             ]} />
             <div className="flex flex-col gap-4 h-full">
                 <h1 className="text-2xl font-extrabold">Datalhes da Pesquisa</h1>
-                <Panel className={'h-full flex flex-col gap-4'}>
+                <Panel className={'min flex flex-col gap-4'}>
                     <div className="">
                         <p>Situação:</p>
                         <p className='font-normal'><StatusBadge status={research.status} /></p>
@@ -56,6 +56,11 @@ function Show({ research }) {
                                 </button>
                             </ToolTip>
                         </p>
+                    </div>
+
+                    <div className="">
+                        <p>Termos de Aceite para Participação na Pesquisa:</p>
+                        <div className='font-normal border-2 rounded-lg p-4 block' dangerouslySetInnerHTML={{ __html: research.acceptance_terms }}></div>
                     </div>
                     <div className="">
                         <p>Criado em:</p>

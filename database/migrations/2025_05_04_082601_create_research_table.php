@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('key')->unique()->index();
             $table->string('title');
             $table->text('description');
+            $table->mediumText('acceptance_terms');
             $table->string('author');
             $table->string('institution');
             $table->string('status')->default('inactive');

@@ -37,6 +37,7 @@ class Research extends Model
         'author',
         'institution',
         'status',
+        'acceptance_terms'
     ];
 
     /**
@@ -55,6 +56,7 @@ class Research extends Model
             'status' => 'string',
             'created_at' => 'datetime:d/m/Y H:i:s',
             'updated_at' => 'datetime:d/m/Y H:i:s',
+            'acceptance_terms' => 'string'
         ];
     }
 

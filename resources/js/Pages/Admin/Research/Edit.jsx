@@ -11,6 +11,7 @@ function Edit({ research }) {
         author: research.author,
         institution: research.institution,
         status: research.status,
+        acceptance_terms: research.acceptance_terms || ''
     });
 
     const handleSubmit = (e) => {

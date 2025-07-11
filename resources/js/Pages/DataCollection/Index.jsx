@@ -60,36 +60,7 @@ function Index({ research, formData }) {
                             <h1 className="text-2xl font-medium text-center mb-4">
                                 Termos de Aceite para Participação na Pesquisa
                             </h1>
-                            <p className="text-lg mb-4">
-                                Bem-vindo(a)! Antes de prosseguir, solicitamos sua leitura e concordância com os seguintes termos de participação na nossa pesquisa:
-                            </p>
-
-                            <ul className="list-decimal list-inside flex flex-col gap-4">
-                                <li className="">
-                                    <strong>Objetivo da Pesquisa</strong><br />
-                                    Esta pesquisa tem como objetivo compreender hábitos de uso de recursos online e avaliar a eficácia de novas ferramentas de aprendizado digital. Sua colaboração é fundamental para melhorar nossos serviços.
-                                </li>
-                                <li className="">
-                                    <strong>Voluntariedade</strong><br />
-                                    Sua participação é totalmente voluntária. Você pode interromper sua participação a qualquer momento, sem necessidade de justificar, e sem qualquer prejuízo.
-                                </li>
-                                <li className="">
-                                    <strong>Procedimentos</strong><br />
-                                    Ao concordar, você será direcionado(a) para um formulário online que inclui perguntas de múltipla escolha e questões abertas. Estimamos que levará cerca de 10 a 15 minutos para ser concluído.
-                                </li>
-                                <li className="">
-                                    <strong>Confidencialidade e Privacidade</strong><br />
-                                    Todas as informações fornecidas serão tratadas de forma estritamente confidencial. Os dados serão armazenados em servidor seguro e criptografados, sendo utilizados apenas para fins de análise estatística e desenvolvimento de relatórios. Nenhuma informação pessoal identificável será divulgada.
-                                </li>
-                                <li className="">
-                                    <strong>Riscos e Benefícios</strong><br />
-                                    Não há riscos conhecidos além dos usuais relacionados ao preenchimento de formulários online. Você não receberá compensação financeira, mas sua participação contribuirá para o avanço do conhecimento na área de tecnologia educacional.
-                                </li>
-                                <li className="">
-                                    <strong>Contato</strong><br />
-                                    Em caso de dúvidas ou solicitações de esclarecimento, entre em contato com a equipe de pesquisa pelo e-mail [pesquisa@exemplo.edu.br](mailto:pesquisa@exemplo.edu.br).
-                                </li>
-                            </ul>
+                            <div className="font-normal border-2 rounded-lg p-4 block" dangerouslySetInnerHTML={{ __html: research.acceptance_terms }}></div>
                             <p>
                                 Ao clicar em “Aceito” abaixo, você declara que leu, compreendeu e concorda livremente com todos os termos descritos acima, autorizando o uso de seus dados conforme aqui estabelecido.
                             </p>
