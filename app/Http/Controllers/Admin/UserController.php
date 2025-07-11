@@ -78,6 +78,13 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, User $user)
     {
+        if ($user->id == 1) {
+            return Redirect::route('users.show', $user)->with('alert', [
+                'message' => 'Você não pode editar este usuário.',
+                'type' => 'error'
+            ]);
+        }
+
         try {
             $user->update($request->only('name', 'email'));
 
@@ -107,6 +114,20 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        if ($user->id == auth()->user()->id) {
+            return Redirect::route('users.show', $user)->with('alert', [
+                'message' => 'Você não pode apagar o seu próprio usuário.',
+                'type' => 'error'
+            ]);
+        }
+
+        if ($user->id == 1) {
+            return Redirect::route('users.show', $user)->with('alert', [
+                'message' => 'Você não pode apagar este usuário.',
+                'type' => 'error'
+            ]);
+        }
+
         try {
             $user->delete();
 
