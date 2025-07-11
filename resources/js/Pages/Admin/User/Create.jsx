@@ -3,7 +3,6 @@ import Panel from '@/Components/Twincode/Dashboard/Panel';
 import DashboardLayout from '@/Layouts/DashboardLayout';
 import { Head, Link, router, useForm } from '@inertiajs/react';
 import Form from './partials/Form';
-import Alert from '@/Components/Twincode/Dashboard/Alert';
 
 function Create() {
     const { data, setData, post, processing, errors } = useForm({
@@ -20,7 +19,6 @@ function Create() {
     return (
         <DashboardLayout>
             <Head title="Cadastrar Usuário" />
-            <Alert />
             <Breadcrumb items={[
                 { label: 'Dashboard', href: route('dashboard') },
                 { label: 'Usuários', href: route('users.index') },

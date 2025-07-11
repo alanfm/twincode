@@ -3,22 +3,23 @@ import Panel from '@/Components/Twincode/Dashboard/Panel';
 import DashboardLayout from '@/Layouts/DashboardLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
 import Form from './partials/Form';
-import Alert from '@/Components/Twincode/Dashboard/Alert';
 
 function Edit({ user }) {
     const { data, setData, put, processing, errors } = useForm({
         name: user.name,
         email: user.email,
+        password: '',
+        password_confirmation: '',
     });
 
     const handleSubmit = (e) => {
         e.preventDefault();
         put(route('users.update', user.id), { data });
     }
+
     return (
         <DashboardLayout>
             <Head title="Editar Usuário" />
-            <Alert />
             <Breadcrumb items={[
                 { label: 'Dashboard', href: route('dashboard') },
                 { label: 'Usuários', href: route('users.index') },

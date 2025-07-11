@@ -3,6 +3,7 @@ import codeToHtml from "@/libs/codeHighLihter";
 import { Head, Link, useForm } from "@inertiajs/react";
 import { useEffect, useRef, useState } from "react";
 import QuestionnaireModal from "./partials/QuestionnaireModal";
+import RootLayout from "@/Layouts/RootLayout";
 
 function changeFontSize(multiplier) {
     const elements = document.querySelectorAll(".code");
@@ -82,7 +83,7 @@ function Participant({ research, comparison, formData, page }) {
     }
 
     return (
-        <>
+        <RootLayout>
             <Head title={research.title} />
             <div className="max-h-screen h-screen max-w-screen w-screen flex flex-col">
                 <header className="bg-neutral-200 py-1 flex justify-between items-center px-4 flex-shrink-0">
@@ -163,7 +164,7 @@ function Participant({ research, comparison, formData, page }) {
                     )}
                 </footer>
             </div>
-        </>
+        </RootLayout>
     );
 }
 

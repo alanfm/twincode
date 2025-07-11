@@ -1,28 +1,13 @@
-import Alert from "@/Components/Twincode/Dashboard/Alert";
 import Logo from "@/Components/Twincode/Logo";
+import RootLayout from "@/Layouts/RootLayout";
 import { Head, Link, useForm } from "@inertiajs/react";
-import { useEffect, useState } from "react";
 
-function Login({ status, canResetPassword }) {
+function Login({ canResetPassword }) {
     const { data, setData, post, processing, errors, reset } = useForm({
         email: '',
         password: '',
         remember: false,
     });
-    const [alert, setAlert] = useState(false);
-
-    useEffect(() => {
-        if (status) {
-            setAlert(true);
-            const debounce = setTimeout(() => {
-                setAlert(false);
-            }, 7000);
-
-            return () => {
-                clearTimeout(debounce);
-            }
-        }
-    }, [status]);
 
     const submit = (e) => {
         e.preventDefault();
@@ -33,8 +18,7 @@ function Login({ status, canResetPassword }) {
     };
 
     return (
-        <>
-            {status && (<Alert type="success" message={status} show={alert} />)}
+        <RootLayout>
             <Head title="Autenticação" />
             <div className="flex flex-col gap-4 min-h-scree h-screen min-w-scree w-scree items-center justify-center bg-neutral-100">
                 <header className="py-6 text-neutral-500">
@@ -113,7 +97,7 @@ function Login({ status, canResetPassword }) {
                     &copy; {new Date().getFullYear()} Twincode. Todos os direitos reservados.
                 </footer>
             </div>
-        </>
+        </RootLayout>
     );
 }
 

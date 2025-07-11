@@ -1,5 +1,5 @@
-import Alert from "@/Components/Twincode/Dashboard/Alert";
 import Logo from "@/Components/Twincode/Logo";
+import RootLayout from "@/Layouts/RootLayout";
 import { Head, Link, useForm } from "@inertiajs/react";
 import { useEffect, useState } from "react";
 
@@ -7,27 +7,15 @@ function ForgotPassword({ status }) {
     const { data, setData, post, processing, errors } = useForm({
         email: '',
     });
-    const [alert, setAlert] = useState(status ? true : false);
-
-    useEffect(() => {
-        setAlert(true);
-        const debounce = setTimeout(() => {
-            setAlert(false);
-        }, 7000);
-
-        return () => {
-            clearTimeout(debounce);
-        }
-    }, [status]);
 
     const submit = (e) => {
         e.preventDefault();
 
         post(route('password.email'));
     };
+
     return (
-        <>
-            {status && (<Alert type="success" message={status} show={alert} />)}
+        <RootLayout>
             <Head title="Recuperar a senha" />
             <div className="flex flex-col gap-4 min-h-scree h-screen min-w-scree w-scree items-center justify-center bg-neutral-100">
                 <header className="py-6 text-neutral-500">
@@ -75,7 +63,7 @@ function ForgotPassword({ status }) {
                     &copy; {new Date().getFullYear()} Twincode. Todos os direitos reservados.
                 </footer>
             </div>
-        </>
+        </RootLayout>
     );
 }
 

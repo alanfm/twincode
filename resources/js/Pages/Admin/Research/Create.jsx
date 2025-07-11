@@ -3,7 +3,6 @@ import Panel from '@/Components/Twincode/Dashboard/Panel';
 import DashboardLayout from '@/Layouts/DashboardLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
 import Form from './partials/Form';
-import Alert from '@/Components/Twincode/Dashboard/Alert';
 
 function Create() {
     const { data, setData, post, processing, errors } = useForm({
@@ -22,7 +21,6 @@ function Create() {
     return (
         <DashboardLayout>
             <Head title="Cadastrar Pesquisa" />
-            <Alert />
             <Breadcrumb items={[
                 { label: 'Dashboard', href: route('dashboard') },
                 { label: 'Pesquisas', href: route('research.index') },

@@ -4,7 +4,6 @@ import Pagination from '@/Components/Twincode/Pagination';
 import DashboardLayout from '@/Layouts/DashboardLayout';
 import { Head, Link, router } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
-import Alert from '@/Components/Twincode/Dashboard/Alert';
 import DataTableReport from './partials/DataTableReport';
 
 function Report({ data, count, page, search, research }) {
@@ -25,7 +24,6 @@ function Report({ data, count, page, search, research }) {
     return (
         <>
             <Head title="Relatórios" />
-            <Alert />
             <Breadcrumb items={[
                 { label: 'Dashboard', href: route('dashboard') },
                 { label: 'Pesquisas', href: route('research.index') },

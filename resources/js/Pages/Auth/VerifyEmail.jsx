@@ -1,24 +1,9 @@
-import PrimaryButton from '@/Components/PrimaryButton';
-import Alert from '@/Components/Twincode/Dashboard/Alert';
 import Logo from '@/Components/Twincode/Logo';
+import RootLayout from '@/Layouts/RootLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
-import { useEffect, useState } from 'react';
 
 export default function VerifyEmail({ status }) {
     const { post, processing } = useForm({});
-
-    const [alert, setAlert] = useState(status ? true : false);
-
-    useEffect(() => {
-        setAlert(true);
-        const debounce = setTimeout(() => {
-            setAlert(false);
-        }, 7000);
-
-        return () => {
-            clearTimeout(debounce);
-        }
-    }, [status]);
 
     const submit = (e) => {
         e.preventDefault();
@@ -27,12 +12,8 @@ export default function VerifyEmail({ status }) {
     };
 
     return (
-        <>
+        <RootLayout>
             <Head title="Verificação de e-mail" />
-
-            {status === 'verification-link-sent' && (
-                <Alert type="success" show={true} message={'Um novo link de verificação foi enviado para o endereço de e-mail que você forneceu durante o registro.'} />
-            )}
             <div className="flex flex-col gap-4 min-h-scree h-screen min-w-scree w-scree items-center justify-center bg-neutral-100">
                 <header className="py-6 text-neutral-500">
                     <Logo />
@@ -66,6 +47,6 @@ export default function VerifyEmail({ status }) {
             <footer className="text-sm">
                 &copy; {new Date().getFullYear()} Twincode. Todos os direitos reservados.
             </footer>
-        </>
+        </RootLayout>
     );
 }

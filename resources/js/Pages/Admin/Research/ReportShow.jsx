@@ -4,14 +4,12 @@ import Panel from '@/Components/Twincode/Dashboard/Panel';
 import DashboardLayout from '@/Layouts/DashboardLayout';
 import { Head, Link, usePage } from '@inertiajs/react';
 import StatusBadge from './partials/StatusBadge';
-import Alert from '@/Components/Twincode/Dashboard/Alert';
 import ToolTip from '@/Components/Twincode/Dashboard/Tooltip';
 
 function ReportShow({ research, participant }) {
     return (
         <>
             <Head title="Detalhes" />
-            <Alert />
             <Breadcrumb items={[
                 { label: 'Dashboard', href: route('dashboard') },
                 { label: 'Pesquisas', href: route('research.index') },

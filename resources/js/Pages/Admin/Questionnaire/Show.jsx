@@ -1,4 +1,3 @@
-import Alert from '@/Components/Twincode/Dashboard/Alert';
 import Breadcrumb from '@/Components/Twincode/Dashboard/Breadcrumb';
 import ConfirmDelete from '@/Components/Twincode/Dashboard/ConfirmDelete';
 import Panel from '@/Components/Twincode/Dashboard/Panel';
@@ -11,7 +10,6 @@ function Show({ questionnaire, respondable, respondable_type, respondable_id }) 
     return (
         <DashboardLayout>
             <Head title="Detalhes" />
-            <Alert />
             <Breadcrumb items={breadcrumbsItems('show', respondable, respondable_type, respondable_id, questionnaire)} />
             <div className="flex flex-col gap-4 h-full">
                 <h1 className="text-2xl font-extrabold">Datalhes do Questionário</h1>

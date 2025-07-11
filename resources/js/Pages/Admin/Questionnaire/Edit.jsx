@@ -4,7 +4,6 @@ import DashboardLayout from '@/Layouts/DashboardLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
 import Form from './partials/Form';
 import breadcrumbsItems from '@/helpers/breadcrumbsItems';
-import Alert from '@/Components/Twincode/Dashboard/Alert';
 
 function Edit({ questionnaire, respondable, respondable_type, respondable_id }) {
     const { data, setData, put, processing, errors } = useForm({
@@ -20,7 +19,6 @@ function Edit({ questionnaire, respondable, respondable_type, respondable_id }) 
     return (
         <DashboardLayout>
             <Head title="Editar Questionário" />
-            <Alert />
             <Breadcrumb items={breadcrumbsItems('show', respondable, respondable_type, respondable_id, questionnaire)} />
             <div className="flex flex-col gap-4 h-full">
                 <h1 className="text-2xl font-extrabold">Editar Questionário</h1>

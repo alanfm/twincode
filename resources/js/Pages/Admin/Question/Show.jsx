@@ -7,13 +7,11 @@ import BadgeTypeQuestion from './partials/BadgeTypeQuestion';
 import breadcrumbsItems from '@/helpers/breadcrumbsItems';
 import AddOption from './partials/AddOption';
 import DeleteOption from './partials/DeleteOption';
-import Alert from '@/Components/Twincode/Dashboard/Alert';
 
 function Show({ question, questionnaire }) {
     return (
         <>
             <Head title="Detalhes" />
-            <Alert />
             <Breadcrumb items={[
                 ...breadcrumbsItems('show', '', '', '', questionnaire),
                 { label: 'Questões', href: route('questionnaires.questions.index', { questionnaire: questionnaire.id }) },

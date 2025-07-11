@@ -1,4 +1,5 @@
 import Logo from '@/Components/Twincode/Logo';
+import RootLayout from '@/Layouts/RootLayout';
 import { Head, useForm } from '@inertiajs/react';
 
 export default function ConfirmPassword() {
@@ -15,7 +16,7 @@ export default function ConfirmPassword() {
     };
 
     return (
-        <>
+        <RootLayout>
             <Head title="Confirm Password" />
 
             <div className="flex flex-col gap-4 min-h-scree h-screen min-w-scree w-scree items-center justify-center bg-neutral-100">
@@ -55,6 +56,6 @@ export default function ConfirmPassword() {
             <footer className="text-sm">
                 &copy; {new Date().getFullYear()} Twincode. Todos os direitos reservados.
             </footer>
-        </>
+        </RootLayout>
     );
 }

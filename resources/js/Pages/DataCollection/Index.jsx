@@ -1,6 +1,6 @@
-import Alert from "@/Components/Twincode/Dashboard/Alert";
 import Logo from "@/Components/Twincode/Logo";
-import { Head, useForm, usePage } from "@inertiajs/react";
+import RootLayout from "@/Layouts/RootLayout";
+import { Head, useForm } from "@inertiajs/react";
 
 function Index({ research, formData }) {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -18,9 +18,8 @@ function Index({ research, formData }) {
     }
 
     return (
-        <>
+        <RootLayout>
             <Head title={research.title} />
-            <Alert />
             <div className="max-h-screen h-screen max-w-screen w-screen flex flex-col">
                 <header className="bg-neutral-200 py-1 flex justify-between items-center px-4 flex-shrink-0">
                     <div className="">
@@ -127,7 +126,7 @@ function Index({ research, formData }) {
                     <span>&nbsp;</span>
                 </footer>
             </div>
-        </>
+        </RootLayout>
     );
 }
 

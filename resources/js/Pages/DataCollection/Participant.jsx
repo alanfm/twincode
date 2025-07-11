@@ -2,6 +2,7 @@ import Logo from "@/Components/Twincode/Logo";
 import { Head, Link, useForm } from "@inertiajs/react";
 import QuestionnaireInitial from "./partials/QuestionnaireInitial";
 import { useCallback, useEffect, useState } from "react";
+import RootLayout from "@/Layouts/RootLayout";
 
 function Participant({ research, formData }) {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -68,7 +69,7 @@ function Participant({ research, formData }) {
     }
 
     return (
-        <>
+        <RootLayout>
             <Head title={research.title} />
             <div className="max-h-screen h-screen max-w-screen w-screen flex flex-col">
                 <header className="bg-neutral-200 py-1 flex justify-between items-center px-4 flex-shrink-0">
@@ -165,7 +166,7 @@ function Participant({ research, formData }) {
                     </button>
                 </footer>
             </div>
-        </>
+        </RootLayout>
     );
 }
 

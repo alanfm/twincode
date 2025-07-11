@@ -5,7 +5,6 @@ import DashboardLayout from '@/Layouts/DashboardLayout';
 import { Head, Link, router } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 import DataTable from './partials/DataTable';
-import Alert from '@/Components/Twincode/Dashboard/Alert';
 
 function Index({ data, count, page, search }) {
     const [searchLocal, setSearchLocal] = useState(search);
@@ -25,7 +24,6 @@ function Index({ data, count, page, search }) {
     return (
         <>
             <Head title="Usuários" />
-            <Alert />
             <Breadcrumb items={[
                 { label: 'Principal', href: route('dashboard') },
                 { label: 'Usuários', href: route('users.index', {search: searchLocal, page: pageLocal}) }

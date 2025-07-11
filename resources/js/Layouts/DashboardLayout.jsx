@@ -1,7 +1,6 @@
 import Alert from "@/Components/Twincode/Dashboard/Alert";
 import Sidebar from "@/Components/Twincode/Dashboard/Sidebar";
 import RootLayout from "@/Layouts/RootLayout";
-import { usePage } from "@inertiajs/react";
 
 function DashboardLayout({ children }) {
     return (

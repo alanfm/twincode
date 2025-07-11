@@ -1,4 +1,5 @@
 import Logo from '@/Components/Twincode/Logo';
+import RootLayout from '@/Layouts/RootLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
 
 export default function ResetPassword({ token, email }) {
@@ -18,7 +19,7 @@ export default function ResetPassword({ token, email }) {
     };
 
     return (
-        <>
+        <RootLayout>
             <Head title="Redefinir senha" />
             <div className="flex flex-col gap-4 min-h-scree h-screen min-w-scree w-scree items-center justify-center bg-neutral-100">
                 <header className="py-6 text-neutral-500">
@@ -97,7 +98,7 @@ export default function ResetPassword({ token, email }) {
                     &copy; {new Date().getFullYear()} Twincode. Todos os direitos reservados.
                 </footer>
             </div>
-        </>
+        </RootLayout>
     );
 
 }

@@ -1,8 +1,14 @@
+import AlertWrapper from "@/Components/Twincode/Wrappers/AlertWrappers";
+import { AlertProvider } from "@/Context/AlertContext";
+
 function RootLayout({ children }) {
     return (
-        <div>
-            {children}
-        </div>
+        <AlertProvider>
+            <AlertWrapper />
+            <div>
+                {children}
+            </div>
+        </AlertProvider>
     );
 }
 

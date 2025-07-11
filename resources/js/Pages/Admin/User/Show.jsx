@@ -1,15 +1,15 @@
-import Alert from '@/Components/Twincode/Dashboard/Alert';
+import { useAlert } from '@/Context/AlertContext';
 import Breadcrumb from '@/Components/Twincode/Dashboard/Breadcrumb';
 import ConfirmDelete from '@/Components/Twincode/Dashboard/ConfirmDelete';
 import Panel from '@/Components/Twincode/Dashboard/Panel';
 import DashboardLayout from '@/Layouts/DashboardLayout';
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, usePage } from '@inertiajs/react';
+import { useEffect } from 'react';
 
 function Show({ user }) {
     return (
         <DashboardLayout>
             <Head title="Detalhes" />
-            <Alert />
             <Breadcrumb items={[
                 { label: 'Dashboard', href: route('dashboard') },
                 { label: 'Usuários', href: route('users.index') },
