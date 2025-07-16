@@ -7,6 +7,7 @@ import breadcrumbsItems from '@/helpers/breadcrumbsItems';
 
 function Create({ respondable, respondable_type, respondable_id }) {
     const { data, setData, post, processing, errors } = useForm({
+        title: '',
         description: '',
         position: 'initial',
     });

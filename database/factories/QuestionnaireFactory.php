@@ -17,7 +17,8 @@ class QuestionnaireFactory extends Factory
     public function definition(): array
     {
         return [
-            'description' => $this->faker->words(2, true),
+            'title' => $this->faker->words(2, true),
+            'description' => $this->faker->paragraph(),
             'position' => $this->faker->randomElement(['initial', 'final']),
             'respondable_type' => 'App\Models\Research',
             'respondable_id' => 1,

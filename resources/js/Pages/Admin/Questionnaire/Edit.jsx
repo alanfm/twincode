@@ -7,6 +7,7 @@ import breadcrumbsItems from '@/helpers/breadcrumbsItems';
 
 function Edit({ questionnaire, respondable, respondable_type, respondable_id }) {
     const { data, setData, put, processing, errors } = useForm({
+        title: questionnaire.title,
         description: questionnaire.description,
         position: questionnaire.position,
     });

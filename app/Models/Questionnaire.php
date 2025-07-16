@@ -26,6 +26,7 @@ class Questionnaire extends Model
      * @see https://laravel.com/docs/12.x/eloquent-model#mass-assignment
      */
     protected $fillable = [
+        'title',
         'description',
         'position',
     ];
@@ -39,6 +40,7 @@ class Questionnaire extends Model
     public function casts(): array
     {
         return [
+            'title' => 'string',
             'description' => 'string',
             'position' => 'string',
             'created_at' => 'datetime:d/m/Y H:i:s',
@@ -81,12 +83,13 @@ class Questionnaire extends Model
             ->where('respondable_id', $request->id)
             ->where(function (Builder $query) use ($request) {
                 $query->when($request->search, function (Builder $query) use ($request) {
-                    $query->where('description', 'like', "%{$request->search}%");
+                    $query->where('description', 'like', "%{$request->search}%")
+                        ->orWhere('title', 'like', "%{$request->search}%");
                 });
             });
 
         $count = $query->count();
-        $data = $query->orderBy('description', 'ASC')->paginate(env('APP_RECORDS_PER_PAGE', 10));
+        $data = $query->orderBy('title', 'ASC')->paginate(env('APP_RECORDS_PER_PAGE', 10));
 
         return [
             'count' => $count,

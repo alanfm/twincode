@@ -15,13 +15,17 @@ function Show({ questionnaire, respondable, respondable_type, respondable_id }) 
                 <h1 className="text-2xl font-extrabold">Datalhes do Questionário</h1>
                 <Panel className={'h-full flex flex-col gap-4'}>
                     <div className="">
+                        <p>Título:</p>
+                        <p className='font-normal'>{questionnaire.title}</p>
+                    </div>
+                    <div className="">
                         <p>Descrição:</p>
                         <p className='font-normal'>{questionnaire.description}</p>
                     </div>
                     {respondable_type === 'research' && (
                         <div className="">
                             <p>Posição</p>
-                            <p className='font-normal'>{questionnaire.position}</p>
+                            <p className='font-normal'>{questionnaire.position == 'initial'? 'Inicial': 'Final'}</p>
                         </div>
                     )}
                     <div className="">

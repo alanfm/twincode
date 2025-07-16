@@ -24,7 +24,8 @@ class UpdateQuestionnaireRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'description' => 'required|string|max:255',
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
             'position' => [Rule::in(Questionnaire::POSITIONS), Rule::requiredIf($this->respondable_type === 'research')],
         ];
     }

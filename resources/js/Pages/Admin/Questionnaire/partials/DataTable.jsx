@@ -12,6 +12,7 @@ function DataTable({ data, respondable_type, respondable_id }) {
                     onMouseOver={() => router.prefetch(route('questionnaires.show', { respondable: respondable_type, id: respondable_id, questionnaire: questionnaire.id }), {method: 'get'},{cacheFor: '1m'})}
                     title="Ver detalhes"
                 >
+                    <td className='py-1 px-1 m-0'>{questionnaire.title}</td>
                     <td className='py-1 px-1 m-0'>{questionnaire.description}</td>
                     {respondable_type == 'research' && <td className='py-1 px-1 m-0'>{questionnaire.position == 'final'? 'Final': 'Inicial'}</td>}
                     <td className='py-1 pr-6 leading-none text-right align-middle'>
@@ -34,6 +35,7 @@ function DataTable({ data, respondable_type, respondable_id }) {
             <table className='table-auto w-full'>
                 <thead className='border-b border-neutral-300'>
                     <tr>
+                        <th className='text-left px-1'>Título</th>
                         <th className='text-left px-1'>Descrição</th>
                         {respondable_type == 'research' && <th className='text-left px-1'>Posição</th>}
                         <th className='text-right px-1'>Detalhes</th>

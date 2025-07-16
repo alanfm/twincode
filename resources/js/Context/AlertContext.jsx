@@ -16,8 +16,12 @@ export const AlertProvider = ({ children }) => {
         }, duration);
     };
 
+    const hideAlert = () => {
+        setAlert((prev) => ({ ...prev, visible: false }));
+    };
+
     return (
-        <AlertContext.Provider value={{ alert, showAlert }}>
+        <AlertContext.Provider value={{ alert, showAlert, hideAlert }}>
             {children}
         </AlertContext.Provider>
     );

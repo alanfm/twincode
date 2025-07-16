@@ -25,7 +25,8 @@ function QuestionnaireModal({
                     {questionnaire.map((q, i) => {
                         return (
                             <fieldset className="border border-gray-300 rounded-md p-4 flex flex-col gap-4" key={q.id}>
-                                <legend className="text-lg font-medium">{q.description}</legend>
+                                <legend className="text-lg font-medium">{q.title}</legend>
+                                <p className="text-sm font-normal">{q.description}</p>
                                 <QuestionnaireComparison
                                     key={q.id + "-" + i}
                                     questionnaire={q}

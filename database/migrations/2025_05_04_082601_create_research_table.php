@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('author');
             $table->string('institution');
             $table->string('status')->default('inactive');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

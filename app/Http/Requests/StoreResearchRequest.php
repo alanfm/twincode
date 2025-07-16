@@ -42,6 +42,7 @@ class StoreResearchRequest extends FormRequest
     {
         $this->merge([
             'key' => Str::upper(Str::random(16)),
+            'user_id' => $this->user()->id,
         ]);
     }
 }

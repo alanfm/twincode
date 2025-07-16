@@ -138,3 +138,13 @@ code .line::before {
     text-align: right;
     color: rgba(115, 138, 148, .4)
 }
+
+.rsw-ce ul {
+  list-style: disc;
+  padding-left: 2em;
+}
+
+.rsw-ce ol {
+  list-style: decimal;
+  padding-left: 2em;
+}

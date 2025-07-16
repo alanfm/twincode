@@ -1,6 +1,5 @@
 import { useAlert } from '@/Context/AlertContext';
-import { usePage } from '@inertiajs/react';
-import React, { use, useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 const variantStyles = {
     success: {
@@ -26,22 +25,29 @@ const variantStyles = {
 };
 
 function Alert() {
-    const [visible, setVisible] = useState(false);
     const [style, setStyle] = useState(variantStyles.info);
-    const { alert } = useAlert();
+    const { alert, hideAlert } = useAlert();
+    const alertRef = useRef(null);
 
     useEffect(() => {
-        if (alert.visible) {
-            setVisible(true);
-            setStyle(variantStyles[alert.type] || variantStyles.info);
+        setStyle(variantStyles[alert.type] || variantStyles.info);
+        
+        function handleClickOutside(event) {
+            if (alertRef.current && !alertRef.current.contains(event.target)) {
+                hideAlert();
+            }
         }
-    }, [alert.visible]);
 
-    const closeAlert = () => {
-        setVisible(false);
-    };
+        if (alert.visible) {
+            document.addEventListener("mousedown", handleClickOutside);
+        }
 
-    if (!visible) return null;
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [alert.visible, hideAlert]);
+
+    if (!alert.visible) return null;
 
     return (
         <div
@@ -54,7 +60,7 @@ function Alert() {
                 {alert.message}
             </div>
             <div className='flex items-start'>
-                <button className="cursor-pointer text-lg pr-2" onClick={closeAlert} aria-label="Fechar" title='Fechar'>
+                <button className="cursor-pointer text-lg pr-2" onClick={() => hideAlert()} aria-label="Fechar" title='Fechar'>
                     &times;
                 </button>
             </div>

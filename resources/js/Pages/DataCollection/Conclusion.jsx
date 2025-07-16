@@ -105,7 +105,8 @@ function Conclusion({ research, formData, lastPage }) {
                                 <div className="w-full mx-auto flex flex-col gap-4 p-4">
                                     {research.questionnaires.map((questionnaire, i) => (
                                         <fieldset className="border border-gray-300 rounded-md p-4 flex flex-col gap-4" key={questionnaire.id}>
-                                            <legend className="text-lg font-medium">{questionnaire.description}</legend>
+                                            <legend className="text-lg font-medium">{questionnaire.title}</legend>
+                                            {questionnaire.description && <p className="text-sm font-normal">{questionnaire.description}</p>}
                                             <QuestionnaireInitial
                                                 key={questionnaire.id + "-" + i}
                                                 questionnaire={questionnaire}
