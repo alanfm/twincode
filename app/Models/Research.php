@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
@@ -107,11 +108,31 @@ class Research extends Model
         return $this->morphMany(Questionnaire::class, 'respondable');
     }
 
+    /**
+     * The user that belong to the research.
+     *
+     * @return BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Scope a query to get a research by its key.
+     *
+     * @param Builder $query
+     */
     public function scopeGetByKey(Builder $query, string $key): Research
     {
         return $query->where('key', $key)->firstOrFail();
     }
 
+    /**
+     * Check if the research is active.
+     *
+     * @return bool
+     */
     public function isActive(): bool
     {
         return $this->status === 'active';

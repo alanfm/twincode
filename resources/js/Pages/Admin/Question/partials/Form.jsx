@@ -14,6 +14,7 @@ function Form({ data, setData, errors }) {
                     <option value='checkbox'>Multipla escolha</option>
                     <option value='text'>Subjetiva</option>
                 </select>
+                <small>Selecione o tipo de resposta que a pergunta irá aceitar.</small>
                 {errors.type && <p className='text-red-500 text-sm'>{errors.type}</p>}
             </div>
             <div className="flex flex-col">
@@ -27,6 +28,7 @@ function Form({ data, setData, errors }) {
                     placeholder='Enunciado da pergunta'
                     rows={3}
                 />
+                <small>Escreva o enunciado da pergunta que será apresentada aos respondentes.</small>
                 {errors.statement && <p className='text-red-500 text-sm'>{errors.statement}</p>}
             </div>
         </>

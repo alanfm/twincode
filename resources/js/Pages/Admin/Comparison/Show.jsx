@@ -11,9 +11,13 @@ function Show({ research, comparison }) {
     const [showCode2, setShowCode2] = useState('');
 
     useEffect(() => {
-        setShowCode1(codeToHtml(comparison.snippet_code_1, comparison.language.toLowerCase()));
-        setShowCode2(codeToHtml(comparison.snippet_code_2, comparison.language.toLowerCase()));
+        async function loadHighlightedCode() {
+            setShowCode1(await codeToHtml(comparison.snippet_code_1, comparison.language.toLowerCase()));
+            setShowCode2(await codeToHtml(comparison.snippet_code_2, comparison.language.toLowerCase()));
+        }
+        loadHighlightedCode();
     }, []);
+
     return (
         <>
             <Head title="Detalhes" />
@@ -30,6 +34,10 @@ function Show({ research, comparison }) {
                     <div className="">
                         <p>Descrição:</p>
                         <p className='font-normal'>{comparison.description}</p>
+                    </div>
+                    <div className="">
+                        <p>Linguagem:</p>
+                        <p className='font-normal'>{comparison.language}</p>
                     </div>
                     <div className="flex gap-4 max-w-[calc(10/12*100)] overflow-hidden">
                         <div className="flex-1">
@@ -57,7 +65,7 @@ function Show({ research, comparison }) {
                     </div>
                 </Panel>
                 <Panel className={'flex gap-4 justify-center items-center'}>
-                    <Link href={route('research.comparison.index', { research: research.id, search: '', page: 1 })} className='btn btn-neutral' prefetch>
+                    <Link href={route('research.comparison.index', { research: research.id, search: '', page: 1 })} className='btn btn-neutral'>
                         <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="size-5"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M9 11l-4 4l4 4m-4 -4h11a4 4 0 0 0 0 -8h-1" /></svg>
                         <span>Voltar</span>
                     </Link>

@@ -102,28 +102,38 @@ function Conclusion({ research, formData, lastPage }) {
                                 <div className="w-full mx-auto flex flex-col gap-4">
                                     <h1 className="text-lg font-medium text-center">Ultima etapa</h1>
                                 </div>
-                                <div className="w-full mx-auto flex flex-col gap-4 p-4">
-                                    {research.questionnaires.map((questionnaire, i) => (
-                                        <fieldset className="border border-gray-300 rounded-md p-4 flex flex-col gap-4" key={questionnaire.id}>
-                                            <legend className="text-lg font-medium">{questionnaire.title}</legend>
-                                            {questionnaire.description && <p className="text-sm font-normal">{questionnaire.description}</p>}
-                                            <QuestionnaireInitial
-                                                key={questionnaire.id + "-" + i}
-                                                questionnaire={questionnaire}
-                                                handleCheckboxChange={handleCheckboxChange}
-                                                handleChange={handleChange}
-                                                data={data}
-                                                errors={errors}
-                                            />
-                                        </fieldset>
-                                    ))}
-                                </div>
+                                {research.questionnaires.length > 0 && (
+                                    <div className="w-full mx-auto flex flex-col gap-4 p-4">
+                                        {research.questionnaires.map((questionnaire, i) => (
+                                            <fieldset className="border border-gray-300 rounded-md p-4 flex flex-col gap-4" key={questionnaire.id}>
+                                                <legend className="text-lg font-medium">{questionnaire.title}</legend>
+                                                {questionnaire.description && <p className="text-sm font-normal">{questionnaire.description}</p>}
+                                                <QuestionnaireInitial
+                                                    key={questionnaire.id + "-" + i}
+                                                    questionnaire={questionnaire}
+                                                    handleCheckboxChange={handleCheckboxChange}
+                                                    handleChange={handleChange}
+                                                    data={data}
+                                                    errors={errors}
+                                                />
+                                            </fieldset>
+                                        ))}
+                                    </div>
+                                )}
+                                {research.questionnaires.length === 0 && (
+                                    <p className="text-center text-gray-500">Obrigado por participar da nossa pesquisa, clique em "Salvar e concluir" para finalizar.</p>
+                                )}
                             </div>
                         </form>
                     </div>
                 </main>
                 <footer className="flex justify-between gap-4 py-2 px-4 bg-neutral-200">
-                    <Link href={route('public.research.comparison', { key: research.key, page: lastPage })} className="btn btn-neutral" prefetch>Anterior</Link>
+                    { research.comparisons.length > 0 && (
+                        <Link href={route('public.research.comparison', { key: research.key, page: lastPage })} className="btn btn-neutral" prefetch>Anterior</Link>
+                    )}
+                    { research.comparisons.length === 0 && (
+                        <Link href={route('public.research.participant', { key: research.key })} className="btn btn-neutral">Anterior</Link>
+                    )}
                     <span>&nbsp;</span>
                     <button
                         className="btn btn-green"

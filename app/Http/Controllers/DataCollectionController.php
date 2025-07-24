@@ -61,7 +61,7 @@ class DataCollectionController extends Controller
         }
 
         return Inertia::render('DataCollection/Participant', [
-            'research' => $research,
+            'research' => $research->load(['comparisons']),
             'formData' => Session::get('data', []),
         ]);
     }
@@ -133,7 +133,7 @@ class DataCollectionController extends Controller
         }
 
         return Inertia::render('DataCollection/Conclusion', [
-            'research' => $research,
+            'research' => $research->load(['comparisons']),
             'formData' => Session::get('data', []),
             'lastPage' => Session::get('lastPage', 1),
         ]);

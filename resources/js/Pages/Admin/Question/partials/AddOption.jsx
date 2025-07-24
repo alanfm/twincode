@@ -1,12 +1,18 @@
 import Modal from "@/Components/Modal";
-import { router, useForm } from "@inertiajs/react";
-import { useState } from "react";
+import { useForm } from "@inertiajs/react";
+import { useEffect, useRef, useState } from "react";
 
 function AddOption({ question }) {
     const { data, setData, post, processing, errors, reset } = useForm({
         description: '',
     });
+
     const [show, setShow] = useState(false);
+    const inputRef = useRef(null);
+
+    useEffect(() => {
+        inputRef.current?.focus();
+    }, []);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -27,7 +33,7 @@ function AddOption({ question }) {
                 <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M12 5l0 14" /><path d="M5 12l14 0" /></svg>
                 <span>Novo</span>
             </button>
-            <Modal show={show} onClose={() => setShow(false)} maxWidth={'sm'}>
+            <Modal show={show} onClose={() => setShow(false)} maxWidth={'lg'}>
                 <form className="flex flex-col gap-4 p-4" onSubmit={handleSubmit}>
                     <h1 className="text-xl font-bold">Cadastrar Item</h1>
                     <div className="w-full flex flex-col">
@@ -36,11 +42,13 @@ function AddOption({ question }) {
                             type="text"
                             name='description'
                             id='description'
-                            value={data.description}
                             className='rounded-md'
                             onChange={(e) => setData('description', e.target.value)}
                             placeholder='Texto do item'
+                            ref={inputRef}
+                            autoFocus
                         />
+                        <small>Escreva o texto do item que será apresentado aos respondentes.</small>
                         {errors.description && <p className='text-red-500 text-sm'>{errors.description}</p>}
                     </div>
                     <div className="flex justify-end gap-4">

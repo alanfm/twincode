@@ -30,6 +30,7 @@ class StoreResearchRequest extends FormRequest
             'key' => 'required|string|max:255|unique:research,key',
             'status' => 'required|string|in:active,inactive,archived',
             'acceptance_terms' => 'required|string',
+            'user_id' => 'required|exists:users,id',
         ];
     }
 

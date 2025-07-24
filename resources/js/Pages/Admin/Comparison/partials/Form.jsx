@@ -1,3 +1,5 @@
+import languages from "@/helpers/acceptedLanguages";
+
 function Form({ data, setData, errors }) {
     return (
         <>
@@ -26,27 +28,9 @@ function Form({ data, setData, errors }) {
                         onChange={(e) => setData('language', e.target.value)}
                     >
                         <option value="" disabled className="text-neutral-400">Selecione uma linguagem</option>
-                        <option value="javascript">JavaScript</option>
-                        <option value="python">Python</option>
-                        <option value="java">Java</option>
-                        <option value="csharp">C#</option>
-                        <option value="php">PHP</option>
-                        <option value="ruby">Ruby</option>
-                        <option value="go">Go</option>
-                        <option value="swift">Swift</option>
-                        <option value="kotlin">Kotlin</option>
-                        <option value="typescript">TypeScript</option>
-                        <option value="html">HTML</option>
-                        <option value="css">CSS</option>
-                        <option value="sql">SQL</option>
-                        <option value="bash">Bash</option>
-                        <option value="json">JSON</option>
-                        <option value="xml">XML</option>
-                        <option value="yaml">YAML</option>
-                        <option value="markdown">Markdown</option>
-                        <option value="xml">XML</option>
-                        <option value="rust">Rust</option>
-                        <option value="dart">Dart</option>
+                        {languages.sort().map((lang) => (
+                            <option key={lang} value={lang}>{lang.charAt(0).toUpperCase() + lang.slice(1).toLowerCase()}</option>
+                        ))}
                     </select>
                     {errors.language && <p className='text-red-500 text-sm'>{errors.language}</p>}
                 </div>

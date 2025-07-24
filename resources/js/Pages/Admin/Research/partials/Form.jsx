@@ -34,6 +34,7 @@ function Form({ data, setData, errors }) {
                     <option value='inactive'>Inativo</option>
                     <option value='archived'>Arquivado</option>
                 </select>
+                <small>A pesquisa só poderá ser respondida com situação <strong>ativa</strong>.</small>
                 {errors.status && <p className='text-red-500 text-sm'>{errors.status}</p>}
             </div>
             <div className="flex flex-col">
@@ -59,7 +60,7 @@ function Form({ data, setData, errors }) {
                     value={data.description}
                     className='rounded-md'
                     onChange={(e) => setData('description', e.target.value)}
-                    placeholder='Descrição da pesquisa'
+                    placeholder='Descrição ou resumo da pesquisa'
                     required
                 />
                 {errors.description && <p className='text-red-500 text-sm'>{errors.description}</p>}
@@ -73,7 +74,7 @@ function Form({ data, setData, errors }) {
                     value={data.author}
                     className='rounded-md'
                     onChange={(e) => setData('author', e.target.value)}
-                    placeholder='Descrição da pesquisa'
+                    placeholder='Nome do autor da pesquisa'
                     autoComplete='off'
                     required
                 />
@@ -88,7 +89,7 @@ function Form({ data, setData, errors }) {
                     value={data.institution}
                     className='rounded-md'
                     onChange={(e) => setData('institution', e.target.value)}
-                    placeholder='Descrição da pesquisa'
+                    placeholder='Instituição vinculada à pesquisa'
                     autoComplete='off'
                     required
                 />
@@ -114,6 +115,8 @@ function Form({ data, setData, errors }) {
                         {/* <BtnUndo /> */}
                     </Toolbar>
                 </Editor>
+
+                <small>Utilize a barra de ferramentas para formatar o texto.</small>
                 {errors.acceptance_terms && <p className='text-red-500 text-sm'>{errors.acceptance_terms}</p>}
             </div>
         </>

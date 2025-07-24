@@ -1,7 +1,7 @@
 import Breadcrumb from '@/Components/Twincode/Dashboard/Breadcrumb';
 import Panel from '@/Components/Twincode/Dashboard/Panel';
 import DashboardLayout from '@/Layouts/DashboardLayout';
-import { Head, Link, router, useForm } from '@inertiajs/react';
+import { Head, Link, useForm } from '@inertiajs/react';
 import Form from './partials/Form';
 
 function Create({ research }) {
@@ -21,7 +21,6 @@ function Create({ research }) {
     return (
         <DashboardLayout>
             <Head title="Cadastrar Comparação" />
-            <Alert />
             <Breadcrumb items={[
                 { label: 'Principal', href: route('dashboard') },
                 { label: 'Pesquisas', href: route('research.index', {search: '', page: 1}) },

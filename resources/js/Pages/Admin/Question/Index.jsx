@@ -26,7 +26,7 @@ function Index({ data, count, page, search, questionnaire }) {
         <>
             <Head title="Questões" />
             <Breadcrumb items={[
-                ...breadcrumbsItems('show', '', '', '', questionnaire),
+                ...breadcrumbsItems('show', null, null, null, questionnaire),
                 {label: `Questões`, href: route('questionnaires.questions.index', { questionnaire: questionnaire.id, search: '', page: 1 })},
             ]} />
             <div className="flex flex-col gap-4 h-full">

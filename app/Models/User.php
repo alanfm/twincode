@@ -6,6 +6,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Http\Request;
 use Illuminate\Notifications\Notifiable;
@@ -51,6 +52,13 @@ class User extends Authenticatable
         ];
     }
 
+    /**
+     * Scope a query to search for users by name or email.
+     *
+     * @param Builder $query
+     * @param Request $request
+     * @return array<string, mixed>
+     */
     public function scopeSearch(Builder $query, Request $request): array
     {
         $query->when($request->search, function ($query) use ($request) {
@@ -69,5 +77,16 @@ class User extends Authenticatable
             'search' => $request->search?? '',
             'page' => $request->page?? 1,
         ];
+    }
+
+
+    /**
+     * Get the researches for the user.
+     *
+     * @return HasMany<Research>
+     */
+    public function researches(): HasMany
+    {
+        return $this->hasMany(Research::class);
     }
 }

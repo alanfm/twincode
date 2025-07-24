@@ -5,8 +5,11 @@ import DashboardLayout from '@/Layouts/DashboardLayout';
 import { Head, Link, usePage } from '@inertiajs/react';
 import StatusBadge from './partials/StatusBadge';
 import ToolTip from '@/Components/Twincode/Dashboard/Tooltip';
+import { useState } from 'react';
 
 function Show({ research }) {
+    const [isOpen, setIsOpen] = useState(false);
+
     return (
         <>
             <Head title="Detalhes" />
@@ -46,33 +49,54 @@ function Show({ research }) {
                     <div className="">
                         <p>Link de acesso público:</p>
                         <p className='font-normal flex gap-2 items-center'>
-                            <span>{route('public.research.index', {key: research.key})}</span>
+                            <span>{route('public.research.index', { key: research.key })}</span>
                             <ToolTip tooltip="Copiar link">
                                 <button
                                     className='cursor-pointer'
-                                    onClick={() => navigator.clipboard.writeText(route('public.research.index', {key: research.key}))}
+                                    onClick={() => navigator.clipboard.writeText(route('public.research.index', { key: research.key }))}
                                 >
-                                    <svg  xmlns="http://www.w3.org/2000/svg"  width={24}  height={24}  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  strokeWidth={2}  strokeLinecap="round"  strokeLinejoin="round"  className="size-5"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 7m0 2.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667z" /><path d="M4.012 16.737a2.005 2.005 0 0 1 -1.012 -1.737v-10c0 -1.1 .9 -2 2 -2h10c.75 0 1.158 .385 1.5 1" /></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="size-5"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M7 7m0 2.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667z" /><path d="M4.012 16.737a2.005 2.005 0 0 1 -1.012 -1.737v-10c0 -1.1 .9 -2 2 -2h10c.75 0 1.158 .385 1.5 1" /></svg>
                                 </button>
                             </ToolTip>
                         </p>
+                        <small>Compartilhe esse link com os respondentes para participarem da pesquisa.</small>
                     </div>
 
                     <div className="">
                         <p>Termos de Aceite para Participação na Pesquisa:</p>
-                        <div className='font-normal border-2 rounded-lg p-4 block' dangerouslySetInnerHTML={{ __html: research.acceptance_terms }}></div>
+                        <div className="">
+                            <button
+                                className="btn btn-neutral mb-4"
+                                onClick={() => setIsOpen(!isOpen)}
+                            >
+                                <span className="font-normal">{isOpen? 'Recolher': 'Expandir'} Termos de Aceite</span>
+                                <span className={`transform transition-transform duration-300 ${isOpen ? 'rotate-180' : 'rotate-0'}`}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="size-5"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M6 9l6 6l6 -6" /></svg>
+                                </span>
+                            </button>
+                            <div className={`pb-4 ${isOpen ? 'block' : 'hidden'}`}>
+                                <div className='font-normal border rounded-md p-4 block' dangerouslySetInnerHTML={{ __html: research.acceptance_terms }}></div>
+                            </div>
+                        </div>
                     </div>
-                    <div className="">
-                        <p>Criado em:</p>
-                        <p className='font-normal'>{research.created_at}</p>
-                    </div>
-                    <div className="">
-                        <p>Atualizado em:</p>
-                        <p className='font-normal'>{research.created_at}</p>
+
+                    <div className="flex gap-4 justify-between">
+                        <div className="flex-1">
+                            <p>Criado por:</p>
+                            <p className='font-normal'>{research.user.name}</p>
+                        </div>
+                        <div className="flex-1">
+                            <p>Criado em:</p>
+                            <p className='font-normal'>{research.created_at}</p>
+                        </div>
+                        <div className="flex-1">
+                            <p>Atualizado em:</p>
+                            <p className='font-normal'>{research.created_at}</p>
+                        </div>
                     </div>
                 </Panel>
                 <Panel className={'flex gap-4 justify-center items-center'}>
-                    <Link href={route('research.index', {search: '', page: 1})} className='btn btn-neutral' prefetch>
+                    <Link href={route('research.index', { search: '', page: 1 })} className='btn btn-neutral' prefetch>
                         <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="size-5"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M9 11l-4 4l4 4m-4 -4h11a4 4 0 0 0 0 -8h-1" /></svg>
                         <span>Voltar</span>
                     </Link>
@@ -81,16 +105,16 @@ function Show({ research }) {
                         <span>Editar</span>
                     </Link>
                     <ConfirmDelete url={route('research.destroy', { research: research.id })} />
-                    <Link href={route('questionnaires.index', {respondable: 'research', id: research.id})} className='btn btn-blue' prefetch>
+                    <Link href={route('questionnaires.index', { respondable: 'research', id: research.id })} className='btn btn-blue' prefetch>
                         <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="size-5"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M9.615 20h-2.615a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8" /><path d="M14 19l2 2l4 -4" /><path d="M9 8h4" /><path d="M9 12h2" /></svg>
                         <span>Questionários</span>
                     </Link>
                     <Link href={route('research.comparison.index', { research, search: '', page: 1 })} className='btn btn-green' prefetch>
-                        <svg  xmlns="http://www.w3.org/2000/svg"  width={24}  height={24}  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  strokeWidth={2}  strokeLinecap="round"  strokeLinejoin="round"  className="size-5"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M7 8l-4 4l4 4" /><path d="M17 8l4 4l-4 4" /><path d="M14 4l-4 16" /></svg>
-                        <span>Códigos</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="size-5"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M7 8l-4 4l4 4" /><path d="M17 8l4 4l-4 4" /><path d="M14 4l-4 16" /></svg>
+                        <span>Comparações de códigos</span>
                     </Link>
                     <Link href={route('research.reports', { research })} className='btn btn-sky' prefetch>
-                        <svg  xmlns="http://www.w3.org/2000/svg"  width={24}  height={24}  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  strokeWidth={2}  strokeLinecap="round"  strokeLinejoin="round"  className="size-5"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M8 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h5.697" /><path d="M18 12v-5a2 2 0 0 0 -2 -2h-2" /><path d="M8 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" /><path d="M8 11h4" /><path d="M8 15h3" /><path d="M16.5 17.5m-2.5 0a2.5 2.5 0 1 0 5 0a2.5 2.5 0 1 0 -5 0" /><path d="M18.5 19.5l2.5 2.5" /></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="size-5"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M8 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h5.697" /><path d="M18 12v-5a2 2 0 0 0 -2 -2h-2" /><path d="M8 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" /><path d="M8 11h4" /><path d="M8 15h3" /><path d="M16.5 17.5m-2.5 0a2.5 2.5 0 1 0 5 0a2.5 2.5 0 1 0 -5 0" /><path d="M18.5 19.5l2.5 2.5" /></svg>
                         <span>Relatórios</span>
                     </Link>
                 </Panel>

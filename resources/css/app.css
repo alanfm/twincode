@@ -49,7 +49,7 @@ body {
 }
 
 .btn:disabled {
-    @apply cursor-not-allowed opacity-50;
+    @apply pointer-events-none opacity-50;
 }
 
 .btn-neutral {
@@ -147,4 +147,15 @@ code .line::before {
 .rsw-ce ol {
   list-style: decimal;
   padding-left: 2em;
+}
+
+.loading {
+  color: gray;
+  font-style: italic;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
 }

@@ -12,7 +12,6 @@ function changeFontSize(multiplier) {
         const newSize = Math.min(Math.max(currentSize * multiplier, 8), 48);
         element.style.fontSize = `${newSize}px`;
     });
-    console.log('Zoom click!')
 }
 
 function Participant({ research, comparison, formData, page }) {
@@ -24,8 +23,11 @@ function Participant({ research, comparison, formData, page }) {
     const [showCode2, setShowCode2] = useState('');
 
     useEffect(() => {
-        setShowCode1(codeToHtml(comparison.data[0].snippet_code_1, comparison.data[0].language.toLowerCase()));
-        setShowCode2(codeToHtml(comparison.data[0].snippet_code_2, comparison.data[0].language.toLowerCase()));
+        async function loadHighlightedCode() {
+            setShowCode1(await codeToHtml(comparison.data[0].snippet_code_1, comparison.data[0].language.toLowerCase()));
+            setShowCode2(await codeToHtml(comparison.data[0].snippet_code_2, comparison.data[0].language.toLowerCase()));
+        }
+        loadHighlightedCode();
     }, []);
 
     useEffect(() => {
@@ -49,8 +51,6 @@ function Participant({ research, comparison, formData, page }) {
             ...formData.answers
         });
     }, []);
-
-    console.log('data', data);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -112,7 +112,7 @@ function Participant({ research, comparison, formData, page }) {
                     </div>
                 </header>
                 <main className="flex-1 flex flex-col bg-white gap-4 overflow-hidden">
-                    <h2 className="text-center font-medium text-lg">{page + ' - ' + comparison.data[0].description}</h2>
+                    <h2 className="text-center font-medium text-lg">{page + ' - ' + comparison.data[0].title}</h2>
                     <div className="flex gap-4">
                         <h3 className="flex-1 text-center font-medium">Código 1</h3>
                         <div className="flex gap-2 items-center">
@@ -145,15 +145,17 @@ function Participant({ research, comparison, formData, page }) {
                         <Link href={comparison.prev_page_url} className="btn btn-neutral">Anterior</Link>
                     )}
 
-                    <QuestionnaireModal
-                        questionnaire={comparison.data[0].questionnaires}
-                        handleCheckboxChange={handleCheckboxChange}
-                        handleChange={handleChange}
-                        handleSubmit={handleSubmit}
-                        data={data.answers}
-                        errors={errors}
-                        processing={processing}
-                    />
+                    {comparison.data[0].questionnaires.length > 0 && comparison.data[0].questionnaires[0].questions.length > 0 && (
+                        <QuestionnaireModal
+                            questionnaire={comparison.data[0].questionnaires}
+                            handleCheckboxChange={handleCheckboxChange}
+                            handleChange={handleChange}
+                            handleSubmit={handleSubmit}
+                            data={data.answers}
+                            errors={errors}
+                            processing={processing}
+                        />
+                    )}
 
                     {comparison.current_page == comparison.last_page && (
                         <Link href={route('public.research.conclusion', { key: research.key })} className="btn btn-neutral">Próximo</Link>

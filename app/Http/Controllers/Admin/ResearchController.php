@@ -63,7 +63,7 @@ class ResearchController extends Controller
     public function show(Research $research)
     {
         return Inertia::render('Admin/Research/Show', [
-            'research' => $research,
+            'research' => $research->load(['user']),
         ]);
     }
 

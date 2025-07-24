@@ -158,13 +158,26 @@ function Participant({ research, formData }) {
                     <Link href={route('public.research.index', { key: research.key })} className="btn btn-neutral" prefetch>Anterior</Link>
                     <span>&nbsp;</span>
                     {/* <button className="btn btn-green">Responder</button> */}
-                    <button
-                        onClick={handleSubmit}
-                        className="btn btn-neutral"
-                        disabled={(data.name === '' || data.name === null || data.name === undefined) || (data.email === '' || data.email === null || data.email === undefined)}
-                    >
-                        Próximo
-                    </button>
+                    {research.comparisons.length > 0
+                        ? (<button
+                                onClick={handleSubmit}
+                                className="btn btn-neutral"
+                                disabled={(data.name === '' || data.name === null || data.name === undefined) || (data.email === '' || data.email === null || data.email === undefined)}
+                            >
+                                Próximo
+                            </button>)
+                        : (<Link
+                                href={(data.name === '' || data.name === null || data.name === undefined) || (data.email === '' || data.email === null || data.email === undefined)? undefined: route('public.research.conclusion', { key: research.key })}
+                                className={(data.name === '' || data.name === null || data.name === undefined) || (data.email === '' || data.email === null || data.email === undefined) ? "btn btn-neutral pointer-events-none opacity-50" : "btn btn-neutral"}
+                                onClick={(e) => {
+                                    if (data.name === '' || data.name === null || data.name === undefined || data.email === '' || data.email === null || data.email === undefined) {
+                                        e.preventDefault();
+                                    }
+                                }}
+                            >
+                                    Próximo
+                            </Link>)
+                    }
                 </footer>
             </div>
         </RootLayout>

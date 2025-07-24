@@ -30,6 +30,8 @@ function DataTable({ data, respondable_type, respondable_id }) {
         });
     }, [data]);
 
+    console.log("DataTable", dataTable);
+
     return (
         <div className="flex-grow overflow-x-auto">
             <table className='table-auto w-full'>
@@ -42,7 +44,7 @@ function DataTable({ data, respondable_type, respondable_id }) {
                     </tr>
                 </thead>
                 <tbody>
-                    {dataTable}
+                    {dataTable.length > 0? dataTable: (<tr><td colSpan={4} className='py-1 px-1 m-0'>Nenhum dado encontrado.<br /><small>Para adicionar um novo registro clique no botão "Novo".</small></td></tr>)}
                 </tbody>
             </table>
         </div>
