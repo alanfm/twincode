@@ -17,9 +17,9 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@tes.t',
-            'password' => Hash::make('qwe123'),
+            'name' => 'Sr. Administrador',
+            'email' => 'administrador@twincode.com.br',
+            'password' => Hash::make('Admin@TwinCode#2025'),
         ]);
 
         $this->call([

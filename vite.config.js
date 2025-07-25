@@ -17,5 +17,9 @@ export default defineConfig({
     ],
     build: {
         chunkSizeWarningLimit: 1500, // Aumenta o limite para 1.5MB
-    }
+    },
+    server: {
+        https:false,
+    },
+    base: '/build/',
 });

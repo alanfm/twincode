@@ -17,7 +17,7 @@ class ResearchSeeder extends Seeder
      */
     public function run(): void
     {
-        Research::factory(26)
+        Research::factory(1)
             ->has(
                 Comparison::factory(5)->state(function (array $attributes, Research $research) {
                     return [

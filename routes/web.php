@@ -61,3 +61,7 @@ Route::prefix('research')->group(function () {
     Route::get('/{key}/conclusion', [DataCollectionController::class, 'conclusion'])->name('public.research.conclusion');
     Route::post('/{key}/conclusion', [DataCollectionController::class, 'store'])->name('public.research.store');
 })->middleware(['web', 'unique.session']);
+
+Route::get('/debug', function () {
+    return request()->secure() ? 'https' : 'http';
+});
