@@ -39,7 +39,7 @@ function Show({ research, comparison }) {
                         <p>Linguagem:</p>
                         <p className='font-normal'>{comparison.language}</p>
                     </div>
-                    <div className="flex gap-4 max-w-[calc(10/12*100)] overflow-hidden">
+                    <div className="flex gap-4 max-w-[83.33%] overflow-hidden">
                         <div className="flex-1">
                             <p className='font-semibold text-center'>Código 1</p>
                             <div className='w-[47.6rem] h-[26rem] overflow-auto' dangerouslySetInnerHTML={{ __html: showCode1 }}></div>
