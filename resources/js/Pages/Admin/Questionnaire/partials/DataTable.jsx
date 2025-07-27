@@ -30,8 +30,6 @@ function DataTable({ data, respondable_type, respondable_id }) {
         });
     }, [data]);
 
-    console.log("DataTable", dataTable);
-
     return (
         <div className="flex-grow overflow-x-auto">
             <table className='table-auto w-full'>

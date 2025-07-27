@@ -3,14 +3,6 @@ const breadcrumbsItems = (page, respondable, respondable_type, respondable_id, q
         { label: 'Principal', href: route('dashboard') }
     ];
 
-    if (questionnaire && !respondable) {
-        respondable_type = respondableTypeParse(questionnaire.respondable_type);
-        respondable_id = questionnaire.respondable_id;
-        respondable = questionnaire.respondable;
-    }
-
-    console.log("Respondable", respondable);
-
     if (respondable_type == 'research') {
         items.push(...researchBreadcrumbsItems(respondable));
         items.push({ label: 'Questionários', href: route('questionnaires.index', { respondable: respondable_type, id: respondable_id, search: '', page: 1 }) });
@@ -28,7 +20,6 @@ const breadcrumbsItems = (page, respondable, respondable_type, respondable_id, q
                 break;
         }
     } else if (respondable_type == 'comparison') {
-        console.log("Research", respondable.research);
         items.push(...researchBreadcrumbsItems(respondable.research));
         items.push(...comparisonBreadcrumbsItems(respondable));
         items.push({ label: 'Questionários', href: route('questionnaires.index', { respondable: respondable_type, id: respondable_id, search: '', page: 1 }) });
@@ -59,8 +50,8 @@ const researchBreadcrumbsItems = (research) => {
 
 const comparisonBreadcrumbsItems = (comparison) => {
     return [
-        { label: 'Comparações', href: route('research.comparison.index', { research: comparison.research.id, search: '', page: '' }) },
-        { label: comparison.description, href: route('research.comparison.show', { research: comparison.research.id, comparison: comparison.id }) },
+        { label: 'Comparações', href: route('research.comparison.index', { research: comparison.id, search: '', page: '' }) },
+        { label: comparison.description, href: route('research.comparison.show', { research: comparison.id, comparison: comparison.id }) },
     ];
 }
 
