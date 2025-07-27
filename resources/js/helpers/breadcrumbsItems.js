@@ -3,12 +3,14 @@ const breadcrumbsItems = (page, respondable, respondable_type, respondable_id, q
         { label: 'Principal', href: route('dashboard') }
     ];
 
-    if (questionnaire) {
+    if (questionnaire && !respondable) {
         respondable_type = respondableTypeParse(questionnaire.respondable_type);
         respondable_id = questionnaire.respondable_id;
         respondable = questionnaire.respondable;
     }
-    
+
+    console.log("Respondable", respondable);
+
     if (respondable_type == 'research') {
         items.push(...researchBreadcrumbsItems(respondable));
         items.push({ label: 'Questionários', href: route('questionnaires.index', { respondable: respondable_type, id: respondable_id, search: '', page: 1 }) });
@@ -51,7 +53,7 @@ const breadcrumbsItems = (page, respondable, respondable_type, respondable_id, q
 const researchBreadcrumbsItems = (research) => {
     return [
         { label: 'Pesquisas', href: route('research.index', { search: '', page: 1 }) },
-        { label: research?.title, href: route('research.show', { research: research.id, search: '', page: 1 }) },
+        { label: research?.title, href: route('research.show', { research: research?.id, search: '', page: 1 }) },
     ];
 }
 

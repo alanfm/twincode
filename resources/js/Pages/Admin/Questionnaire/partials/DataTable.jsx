@@ -37,7 +37,7 @@ function DataTable({ data, respondable_type, respondable_id }) {
             <table className='table-auto w-full'>
                 <thead className='border-b border-neutral-300'>
                     <tr>
-                        <th className='text-left px-1'>Título</th>
+                        <th className='text-left px-1 text-nowrap'>Título</th>
                         <th className='text-left px-1'>Descrição</th>
                         {respondable_type == 'research' && <th className='text-left px-1'>Posição</th>}
                         <th className='text-right px-1'>Detalhes</th>
