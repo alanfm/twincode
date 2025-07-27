@@ -73,7 +73,7 @@ const Carousel = () => {
 
     return (
         <div
-            className="relative w-full overflow-hidden bg-white rounded-2xl shadow-md h-72"
+            className="relative w-full lg:w-6xl mx-auto overflow-hidden  rounded-2xl h-2/3"
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
@@ -95,14 +95,14 @@ const Carousel = () => {
 
             {/* Botões de navegação */}
             <button
-                className="absolute top-1/2 -translate-y-1/2 left-4 p-2 bg-neutral-600 text-white rounded-full hover:bg-neutral-700 focus:outline-none shadow-lg"
+                className="absolute top-1/2 -translate-y-1/2 -left-1 lg:left-4 p-2 bg-neutral-600 text-white rounded-full hover:bg-neutral-700 focus:outline-none shadow-lg"
                 onClick={goToPrevious}
                 aria-label="Slide anterior"
             >
                 <svg  xmlns="http://www.w3.org/2000/svg"  width={24}  height={24}  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  strokeWidth={2}  strokeLinecap="round"  strokeLinejoin="round"  className="size-6"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M5 12l14 0" /><path d="M5 12l4 4" /><path d="M5 12l4 -4" /></svg>
             </button>
             <button
-                className="absolute top-1/2 -translate-y-1/2 right-4 p-2 bg-neutral-600 text-white rounded-full hover:bg-neutral-700 focus:outline-none shadow-lg"
+                className="absolute top-1/2 -translate-y-1/2 -right-1 lg:right-4 p-2 bg-neutral-600 text-white rounded-full hover:bg-neutral-700 focus:outline-none shadow-lg"
                 onClick={goToNext}
                 aria-label="Próximo slide"
             >
@@ -110,7 +110,7 @@ const Carousel = () => {
             </button>
 
             {/* Indicadores */}
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10 -mb-2">
                 {slides.map((_, index) => (
                     <button
                         key={index}

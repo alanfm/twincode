@@ -6,8 +6,8 @@ export default function Welcome() {
     return (
         <PublicLayout title="Principal">
             <Head title="Principal" />
-            <main className="flex flex-col gap-8">
-                <section className="bg-gradient-to-r from-blue-400 to-sky-500 text-white py-20 px-6 rounded-2xl shadow-md">
+            <main className="flex flex-col gap-8 lg:flex-grow lg:flex-1">
+                <section className="bg-gradient-to-r from-teal-500 to-teal-700 text-white py-20 px-6 rounded-2xl shadow-md lg:h-[34rem] flex items-center justify-center">
                     <div className="max-w-4xl mx-auto text-center">
                         <h1 className="text-4xl md:text-5xl font-bold mb-6">TwinCode</h1>
                         <p className="text-xl md:text-2xl mb-8">
