@@ -31,7 +31,7 @@ function Index({ data, count, page, search, research }) {
                 { label: 'Comparações', href: route('research.comparison.index', {research: research.id, search: searchLocal, page: pageLocal}) }
             ]} />
             <div className="flex flex-col gap-4 h-full">
-                <h1 className="text-2xl font-extrabold">Comparações</h1>
+                <h1 className="text-2xl font-extrabold">Comparações de Códigos</h1>
                 <Panel>
                     <Link
                         href={route('research.comparison.create', research.id)}

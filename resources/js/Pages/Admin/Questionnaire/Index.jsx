@@ -27,7 +27,7 @@ function Index({ data, count, page, search, respondable_id, respondable_type, re
             <Head title="Questionários" />
             <Breadcrumb items={breadcrumbsItems('index', respondable, respondable_type, respondable_id)} />
             <div className="flex flex-col gap-4 h-full">
-                <h1 className="text-2xl font-extrabold">Questionários</h1>
+                <h1 className="text-2xl font-extrabold">Questionários {respondable_type == 'comparison'? ' da Comparação': ' da Pesquisa'}</h1>
                 <Panel>
                     <Link
                         href={route('questionnaires.create', { respondable: respondable_type, id: respondable_id })}
@@ -44,10 +44,16 @@ function Index({ data, count, page, search, respondable_id, respondable_type, re
                     <div className="flex justify-end">
                         <Pagination data={data} count={count}>
                             {respondable_type === 'research' && (
-                                <Link href={route('research.show', respondable_id)} className='btn btn-neutral' prefetch>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="size-5"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M9 11l-4 4l4 4m-4 -4h11a4 4 0 0 0 0 -8h-1" /></svg>
-                                    <span>Voltar</span>
-                                </Link>
+                                <div className='flex gap-4'>
+                                    <Link href={route('research.show', respondable_id)} className='btn btn-neutral' prefetch>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="size-5"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M9 11l-4 4l4 4m-4 -4h11a4 4 0 0 0 0 -8h-1" /></svg>
+                                        <span>Voltar</span>
+                                    </Link>
+                                    <Link href={route('research.comparison.index', { research: respondable.id, search: '', page: 1 })} className='btn btn-green' prefetch>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="size-5"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M7 8l-4 4l4 4" /><path d="M17 8l4 4l-4 4" /><path d="M14 4l-4 16" /></svg>
+                                        <span>Comparações de códigos</span>
+                                    </Link>
+                                </div>
                             )}
                             {respondable_type === 'comparison' && (
                                 <Link href={route('research.comparison.index', {research: respondable.research.id, comparison: respondable.id})} className='btn btn-neutral' prefetch>
