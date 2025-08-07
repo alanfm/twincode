@@ -1,8 +1,11 @@
+import Modal from "@/Components/Modal";
 import Carousel from "@/Components/Twincode/Carousel";
 import PublicLayout from "@/Layouts/PublicLayout";
 import { Head } from "@inertiajs/react";
+import { useState } from "react";
 
 export default function Welcome() {
+    const [show, setShow] = useState(false);
     return (
         <PublicLayout title="Principal">
             <Head title="Principal" />
@@ -76,12 +79,22 @@ export default function Welcome() {
                         <p className="text-lg mb-8">
                             Cadastre-se para acessar bases de dados, participar de estudos ou integrar o projeto TwinCode.
                         </p>
-                        <a
-                            href="/cadastro"
-                            className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
-                        >
-                            Participar da Pesquisa
-                        </a>
+                        <button className={`btn btn-blue cursor-pointer`} onClick={() => setShow(true)}>
+                            Cadastrar-se na plataforma
+                        </button>
+                        <Modal show={show} onClose={() => setShow(false)} maxWidth={'lg'}>
+                            <div className="flex flex-col gap-4 p-4">
+                                <h1 className="text-xl font-bold">Aviso</h1>
+                                <p className="text-justify">Use o login e senha que está no formulário de avaliação da ferramenta.</p>
+                                <a href="https://forms.gle/SjaSbeva7vULQVtS8" target="_blank" className="text-center text-blue-600 hover:text-blue-700">https://forms.gle/SjaSbeva7vULQVtS8</a>
+                                <div className="flex justify-end gap-4">
+                                    <button className='btn btn-neutral cursor-pointer' onClick={() => setShow(false)}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="size-5"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M18 6l-12 12" /><path d="M6 6l12 12" /></svg>
+                                        <span>Fechar</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </Modal>
                     </div>
                 </section>
             </main>

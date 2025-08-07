@@ -112,7 +112,7 @@ function Participant({ research, comparison, formData, page }) {
                     </div>
                 </header>
                 <main className="flex-1 flex flex-col bg-white gap-4 overflow-hidden">
-                    <h2 className="text-center font-medium text-lg">{page + ' - ' + comparison.data[0].title}</h2>
+                    <h2 className="text-center font-medium text-lg">{page + ' - ' + comparison.data[0].description}</h2>
                     <div className="flex gap-4">
                         <h3 className="flex-1 text-center font-medium">Código 1</h3>
                         <div className="flex gap-2 items-center">

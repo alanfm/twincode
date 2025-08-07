@@ -10,8 +10,8 @@ function Form({ data, setData, errors }) {
                     className='rounded-md'
                     onChange={(e) => setData('type', e.target.value)}
                 >
-                    <option value='radio'>Objetiva</option>
-                    <option value='checkbox'>Multipla escolha</option>
+                    <option value='radio'>Objetiva de única escolha</option>
+                    <option value='checkbox'>Objetiva de multipla escolha</option>
                     <option value='text'>Subjetiva</option>
                 </select>
                 <small>Selecione o tipo de resposta que a pergunta irá aceitar.</small>
