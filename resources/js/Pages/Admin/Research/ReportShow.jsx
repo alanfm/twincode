@@ -11,6 +11,13 @@ function ReportShow({ research, participant }) {
         </div>
     ));
 
+    const options = participant.options.map(option => (
+        <div className="" key={option.id}>
+            <p>{option.question.statement}</p>
+            <p className='font-normal'>{option.description}</p>
+        </div>
+    ));
+
     return (
         <>
             <Head title="Detalhes do Relatório" />
@@ -33,6 +40,7 @@ function ReportShow({ research, participant }) {
                         <p className='font-normal'>{participant.email}</p>
                     </div>
                     {answers.length > 0 && answers}
+                    {options.length > 0 && options}
                     <div className="">
                         <p>Criado em:</p>
                         <p className='font-normal'>{research.created_at}</p>
