@@ -6,6 +6,7 @@ use App\Exports\ReportExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreResearchRequest;
 use App\Http\Requests\UpdateResearchRequest;
+use App\Models\Answer;
 use App\Models\Comparison;
 use App\Models\Participant;
 use App\Models\Questionnaire;
@@ -128,15 +129,11 @@ class ResearchController extends Controller
 
     public function reportShow(Request $request, Research $research, Participant $participant)
     {
-        $participant->load(['answers', 'questionnaire', 'comparisons']);
-        $questionnaire = Questionnaire::find($participant->questionnaire_id);
-        $comparisons = Comparison::where('participant_id', $participant->id)->get();
+        $participant->load(['answers' => ['question'], 'options' => ['question']]);
 
         return Inertia::render('Admin/Research/ReportShow', [
             'research' => $research,
             'participant' => $participant,
-            'questionnaire' => $questionnaire,
-            'comparisons' => $comparisons,
         ]);
     }
 

@@ -1,5 +1,6 @@
 import { Link, router } from "@inertiajs/react";
 import { useMemo } from "react";
+import BadgePosition from "./BadgePosition";
 
 function DataTable({ data, respondable_type, respondable_id }) {
     const dataTable = useMemo(() => {
@@ -14,7 +15,7 @@ function DataTable({ data, respondable_type, respondable_id }) {
                 >
                     <td className='py-1 px-1 m-0'>{questionnaire.title}</td>
                     <td className='py-1 px-1 m-0'>{questionnaire.description}</td>
-                    {respondable_type == 'research' && <td className='py-1 px-1 m-0'>{questionnaire.position == 'final'? 'Final': 'Inicial'}</td>}
+                    {respondable_type == 'research' && <td className='py-1 px-1 m-0'><BadgePosition position={questionnaire.position} /></td>}
                     <td className='py-1 pr-6 leading-none text-right align-middle'>
                         <Link href={route('questionnaires.show', { respondable: respondable_type, id: respondable_id, questionnaire: questionnaire.id })} className='inline-block text-blue-500 hover:text-blue-600 transition' title='Ver detalhes'>
                             <svg xmlns="http://www.w3.org/2000/svg" className="size-8" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">

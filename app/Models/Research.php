@@ -79,7 +79,7 @@ class Research extends Model
         });
 
         $count = $query->count();
-        $data = $query->orderBy('title', 'ASC')->paginate(env('APP_RECORDS_PER_PAGE', 10));
+        $data = $query->orderBy('created_at', 'DESC')->paginate(env('APP_RECORDS_PER_PAGE', 10));
         return [
             'count' => $count,
             'data' => $data->appends(['search' => $request->search?? '']),

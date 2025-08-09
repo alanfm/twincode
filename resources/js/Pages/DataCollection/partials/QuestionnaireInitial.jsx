@@ -13,8 +13,7 @@ function QuestionnaireInitial({ questionnaire, handleCheckboxChange, handleChang
                         </label>
                         {question.type === 'text' && (
                             <>
-                                <input
-                                    type="text"
+                                <textarea
                                     name={question.id}
                                     id={question.id}
                                     className="border border-gray-300 rounded-md p-2"

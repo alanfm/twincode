@@ -12,7 +12,7 @@ function Form({ data, setData, errors }) {
                 >
                     <option value='radio'>Objetiva de única escolha</option>
                     <option value='checkbox'>Objetiva de multipla escolha</option>
-                    <option value='text'>Subjetiva</option>
+                    <option value='text'>Subjetiva ou dissertativa</option>
                 </select>
                 <small>Selecione o tipo de resposta que a pergunta irá aceitar.</small>
                 {errors.type && <p className='text-red-500 text-sm'>{errors.type}</p>}

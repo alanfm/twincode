@@ -13,8 +13,7 @@ function QuestionnaireComparison({ questionnaire, handleCheckboxChange, handleCh
                             {i + 1} - {question.statement}
                         </label>
                         {question.type === 'text' && (
-                            <input
-                                type="text"
+                            <textarea
                                 name={question.id}
                                 id={question.id}
                                 className="border border-gray-300 rounded-md p-2"
